@@ -1,5 +1,37 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "public/*"]
+  "exclude": ["node_modules/*", "public/*"],
+	"compilerOptions": {
+    "baseUrl": ".",
+		"module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+    "stripInternal": true,
+		"target": "es2017",
+		"outDir": "dist",
+		"lib": [
+			"es2017", "WebWorker", "dom.iterable", "dom"
+		],
+
+    "importsNotUsedAsValues": "error",
+    "preserveValueImports": true,
+    "isolatedModules": true,
+
+		"sourceMap": true,
+		"rootDir": "src",
+		"strict": false,
+		"noImplicitReturns": true,
+    "esModuleInterop": true,
+    "noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["svelte"],
+    "paths": {
+      "@/*": [ "src/*" ]
+    }
+	}
 }

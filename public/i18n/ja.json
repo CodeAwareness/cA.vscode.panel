@@ -1,0 +1,89 @@
+{
+  "title": "CodeAwarenessにログイン",
+  "login": "ログイン",
+  "email": "メールアドレス",
+  "password": "パスワード",
+  "loading": "。。。読込中",
+  "back": "戻る",
+  "send": "送信",
+  "cancel": "キャンセル",
+  "comment": "投稿",
+  "or": "あるいは",
+  "pleaseWait": "少々お待ちください",
+  "auth": {
+    "title": "CodeAwareness",
+    "signUp": "CodeAwareness新規登録",
+    "login": "ログイン",
+    "loggingIn": "ログインしています",
+    "loginWith": "よろしければソーシャル・アカウントでログイン:",
+    "registeringNow": "アカウントを登録しています",
+    "register": "登録",
+    "returnToLogin": "ログインに戻る",
+    "forgotPassword": "パスワードを忘れましたか？",
+    "sendEmail": "メールを送信",
+    "checkYourEmail": "メール送信完了。パスワードを更新するためにメールをチェックしてください。",
+    "passwordAssist": "パスワード更新の案内をメールで送ります。",
+    "passRequirements": "少なくとも8文字、１数字、１ローマ字",
+    "dontHaveAccount": "アカウントはありません？",
+    "ClickToSignup": "新登録しましょう",
+
+    "refresh": "再読込",
+    "close": "閉じる",
+    "mergeAll": "全部マージする",
+    "openFile": "ファイルを開く",
+    "openChanges": "変更を開く",
+    "selectRange": "セレクトする",
+    "mergeSlice": "変更をマージする",
+    "openDiff": "diffを開く"
+  },
+  "branches": {
+    "branches": "ブランチ"
+  },
+  "comments": {
+    "comments": "コメント",
+    "typeYourComment": "コメントを入力してください。。。"
+  },
+  "groups": {
+    "groups": "グループ"
+  },
+  "invites": {
+    "header": "このファイルは共有されてます",
+    "title": "以下のリンクを提供して共同作業ができます：",
+    "delete": "シェアを削除",
+    "deleteConfirm": "このシェアを削除すると、相手の方がこのシェアにアクセス出来なくなります。"
+  },
+  "menu": {
+    "contrib": "貢献",
+    "invites": "シェア・招待"
+  },
+  "options": {
+    "shareFile": "ファイルを共有",
+    "shareFolder": "フォルダーを共有",
+    "btnSplit": "グループを作成",
+    "groupNames": "グループ名",
+    "nameDuplication": "グループ名はユニークではありません。",
+    "nrGroups": "プライベート・グループ：",
+    "orphanFile": "このファイルはgitリポジトリに所属していません。",
+    "setupInfo": "複数のグループに分けて共有することもできます。各グループのユーザーにそれぞれのリンクを送信してグループ内では共同できるけど、他グループの作業が見えない状態となります。つまり、同じグループのユーザーはお互いの作業を見ることができますが、すべてのグループ作業を見ることができるのは発信者（貴方）のみです。",
+    "setupFile": "ファイルを共有します",
+    "setupFolder": "このファイルの親フォルダーを共有します"
+  },
+  "shared": {
+    "acceptShare": "実行",
+    "downloadFolder": "どこにダウンロードする",
+    "downloadFolderPlaceholder": "C:\\Users\\Alice\\Downloads...",
+    "instructions": "ファイルをダウンロードしてから、新しいウインドーに開かれます。その新しいウィンドーの中でCodeAwarenessのを開いてください。",
+    "shareInfo": "招待リンクを入力したら、CodeAwarenessはシェアされたリソースをダウンロードして、共同作業環境を設定します。",
+    "yourLink": "招待リンク",
+    "yourLinkPlaceholder": "codeawareness://my-file..."
+  },
+  "sync": {
+    "intro": "上のコードをコピーして、プラウザーに入力したください：",
+    "open": "（ブラウザーを開く）"
+  },
+  "users": {
+    "contributors": "寄稿者",
+    "noContributors": "このファイルには寄稿者はいません。",
+    "teamName": "チーム名"
+  }
+}

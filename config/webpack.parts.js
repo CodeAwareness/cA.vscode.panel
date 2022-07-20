@@ -1,9 +1,11 @@
 const path = require('path')
 const preprocess = require('svelte-preprocess')
+const webpack = require('webpack')
 
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const { WebpackPluginServe } = require('webpack-plugin-serve')
 const DotenvPlugin = require('dotenv-webpack')
@@ -33,7 +35,8 @@ exports.devServer = () => ({
   watch: true,
   plugins: [
     new WebpackPluginServe({
-      port: 8080,
+      port: 3080,
+      host: '0.0.0.0',
       static: path.resolve(process.cwd(), 'dist'),
       historyFallback: true,
     }),
@@ -70,6 +73,13 @@ exports.extractCSS = ({ options = {}, loaders = [] } = {}) => {
           ),
           sideEffects: true,
         },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: "static/[hash][ext][query]",
+          },
+        },
       ],
     },
     plugins: [
@@ -80,25 +90,43 @@ exports.extractCSS = ({ options = {}, loaders = [] } = {}) => {
   }
 }
 
-exports.typescript = () => ({
-  module: { rules: [{ test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ }] },
-})
+exports.typescript = () => {
+  console.log('TYPESCRIPT:', path.resolve(__dirname, '../src'))
+  return {
+    resolve: {
+      plugins: [new TsconfigPathsPlugin()],
+      extensions: ['.ts', '.js'],
+    },
+    module: {
+      rules: [
+        { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
+      ],
+    },
+  }
+}
 
 exports.loadSvg = () => ({
   module: { rules: [{ test: /\.svg$/, type: 'asset' }] },
 })
 
-exports.useDotenv = () => ({
-  plugins: [new DotenvPlugin()],
+exports.useDotenv = (mode) => ({
+  plugins: [
+    new DotenvPlugin(),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(mode === 'production'),
+    }),
+  ],
 })
 
 exports.svelte = mode => {
   const prod = mode === 'production'
+  console.log('SVELTE', mode, path.resolve(__dirname, '../src'))
 
   return {
     resolve: {
       alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
+        '@': path.resolve(__dirname, '../src'),
       },
       extensions: ['.mjs', '.js', '.svelte', '.ts'],
       mainFields: ['svelte', 'browser', 'module', 'main'],

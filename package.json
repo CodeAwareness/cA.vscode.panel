@@ -44,6 +44,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "mini-html-webpack-plugin": "^3.1.3",
     "node-sass": "^7.0.1",
+    "postcss-load-config": "^4.0.1",
     "postcss-loader": "^7.0.1",
     "svelte": "^3.49.0",
     "svelte-language-server": "^0.14.30",
@@ -51,6 +52,7 @@
     "svelte-loading-spinners": "^0.1.7",
     "svelte-preprocess": "^4.10.7",
     "ts-loader": "^9.3.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
@@ -60,6 +62,12 @@
     "webpackbar": "^5.0.2"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "ky": "^0.31.0",
+    "lodash-es": "^4.17.21",
+    "moment-timezone": "^0.5.34",
+    "socket.io-client": "^4.5.1",
+    "svelte-i18n": "^3.4.0",
     "svelte-inline-svg": "^1.1.3",
     "webpack-bundle-analyzer": "^4.5.0"
   }

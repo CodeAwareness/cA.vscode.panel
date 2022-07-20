@@ -1,0 +1,46 @@
+<script lang="ts">
+  import { _ } from '@/services/i18n'
+  import { mode } from '@/store/app.store'
+  import { activeProfile } from '@/store/user.store'
+  import Comments from './comments.svelte'
+  import Users from './users.svelte'
+  import Branches from './branches.svelte'
+  import Profile from './profile.svelte'
+
+  import Search from './search.svelte'
+
+  let activeMode = 'repo'
+
+  activeProfile.subscribe(user => (activeMode = !!user && 'profile'))
+
+  // Modes: profile, repo
+  mode.subscribe(m => (activeMode = m))
+</script>
+
+{#if activeMode === 'repo'}
+  <Search/>
+  <div class="container">
+    <Users />
+    <Branches />
+  </div>
+  <div class="container">
+    <Comments />
+  </div>
+{:else if activeMode === 'profile'}
+  <div class="container">
+    <Profile />
+  </div>
+{/if}
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  @media screen and (min-width: 1024px){
+    .container {
+      width: 50%;
+      float: left;
+      padding: 0 25px;
+      box-sizing: border-box;
+    }
+  }
+</style>

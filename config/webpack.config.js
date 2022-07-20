@@ -4,18 +4,22 @@ const parts = require('./webpack.parts')
 const { mode, analyze } = require('webpack-nano/argv')
 
 const common = merge([
-  { output: { path: path.resolve(process.cwd(), 'dist') } },
-  parts.page({ title: 'Sh*t Kanye says' }),
+  {
+    output: {
+      path: path.resolve(process.cwd(), 'dist')
+    },
+  },
+  parts.page({ title: 'CodeAwareness VSCode panel' }),
   parts.loadSvg(),
   parts.svelte(mode),
   parts.extractCSS({ loaders: [parts.postcss()] }),
   parts.cleanDist(),
   parts.useWebpackBar(),
-  parts.useDotenv(),
+  parts.useDotenv(mode),
 ])
 
 const development = merge([
-  { entry: ['./src/index.ts', 'webpack-plugin-serve/client'] },
+  { entry: ['./src/main.ts', 'webpack-plugin-serve/client'] },
   { target: 'web' },
   parts.generateSourceMaps({ type: 'eval-source-map' }),
   parts.esbuild(),
@@ -24,7 +28,8 @@ const development = merge([
 
 const production = merge(
   [
-    { entry: ['./src/index.ts'] },
+    { entry: ['./src/main.ts'] },
+    { target: 'web' },
     parts.typescript(),
     parts.optimize(),
     analyze && parts.analyze(),
