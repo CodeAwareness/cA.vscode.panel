@@ -20,7 +20,7 @@ declare global {
 }
 
 const IS_WEB = /^http/.test(location.href) && location.search
-const EDITOR_LOCALE = IS_WEB ? location.search.substr(3, 2) : window.EDITOR_LOCALE || 'ja'
+const EDITOR_LOCALE = IS_WEB ? location.search.substr(3, 2) : window.EDITOR_LOCALE || 'en'
 const DEBUG = IS_WEB && location.search.substr(6, 3) === 'd=1'
 const THEME = IS_WEB && location.search.substr(10, 2) === 'c=' && location.search.substr(12, 1)
 
@@ -46,7 +46,7 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
  * - setup the activeProject
  * - redirect error handler to VSCode
  ****************************************************************/
-mode.set('sync')
+mode.set('repo')
 const wsEngine = new WSIO()
 wsEngine.init()
 wsIO.set(wsEngine)

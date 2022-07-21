@@ -11,7 +11,10 @@
   let showUX: boolean
   let isAuthenticated = false
 
-  tokens.subscribe((value: any) => (isAuthenticated = value && !!value.access))
+  tokens.subscribe((value: any) => {
+    console.log('TOKENS', value)
+    isAuthenticated = value && !!value.access
+  })
 
   let wsEngine: WSIO
   wsIO.subscribe(val => {
@@ -41,8 +44,10 @@
 <div>
   {#if showUX}
     {#if isAuthenticated}
+      <h1>AUTHENTICATED</h1>
       <Dashboard />
     {:else}
+      <h1>PLEASE LOGIN</h1>
       <div class="login">
         <Login />
       </div>

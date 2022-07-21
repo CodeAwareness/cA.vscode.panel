@@ -17,6 +17,7 @@
   mode.subscribe(m => (activeMode = m))
 </script>
 
+<h1>ACTIVE MODE: {activeMode}</h1>
 {#if activeMode === 'repo'}
   <Search/>
   <div class="container">
