@@ -24,7 +24,7 @@
   let wsEngine: WSIO
   wsIO.subscribe(val => {
     wsEngine = val
-    wsEngine.rSocket.on('newComment', addComment)
+    wsEngine.rSocket?.on('newComment', addComment)
   })
 
   const toggle = () => (open = !open)

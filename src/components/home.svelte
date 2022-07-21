@@ -17,7 +17,7 @@
   wsIO.subscribe(val => {
     wsEngine = val
     console.log('wsEngine', wsEngine)
-    wsEngine.rSocket.on('updateAvailable', fetchDiffs)
+    wsEngine.rSocket?.on('updateAvailable', fetchDiffs)
   })
 
   i18nReady.subscribe((val) => setTimeout(() => (showUX = val), 100))

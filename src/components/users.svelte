@@ -23,7 +23,7 @@
   let wsEngine: WSIO
   wsIO.subscribe(val => {
     wsEngine = val
-    wsEngine.uSocket.on('cameOnline', cameOnline)
+    wsEngine.uSocket?.on('cameOnline', cameOnline)
   })
 
   function cameOnline(user) {

@@ -68,7 +68,7 @@
       })
   }
 
-  logger.log('API:', `${config.SERVER_URL}/v1/log/log`)
+  logger.log('API:', `${config.SERVER_URL}/log/log`)
 
 </script>
 

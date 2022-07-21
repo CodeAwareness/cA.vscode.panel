@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const preprocess = require('svelte-preprocess')
 const webpack = require('webpack')
 
@@ -7,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { WebpackPluginServe } = require('webpack-plugin-serve')
 const DotenvPlugin = require('dotenv-webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -19,6 +21,14 @@ exports.analyze = () => ({
       generateStatsFile: true,
     }),
   ],
+})
+
+exports.copyAssets = () => ({
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public' }],
+    }),
+  ]
 })
 
 // clean dist directory on build
@@ -36,9 +46,14 @@ exports.devServer = () => ({
   plugins: [
     new WebpackPluginServe({
       port: 3080,
-      host: '0.0.0.0',
+      host: '127.0.0.1',
       static: path.resolve(process.cwd(), 'dist'),
       historyFallback: true,
+      https: {
+        key: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/localhost.key'),
+        cert: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/localhost.crt'),
+        ca: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/ca.crt'),
+      }
     }),
   ],
 })

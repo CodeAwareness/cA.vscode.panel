@@ -14,6 +14,7 @@ const common = merge([
   parts.svelte(mode),
   parts.extractCSS({ loaders: [parts.postcss()] }),
   parts.cleanDist(),
+  parts.copyAssets(),
   parts.useWebpackBar(),
   parts.useDotenv(mode),
 ])
