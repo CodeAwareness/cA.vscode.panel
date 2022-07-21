@@ -5,7 +5,7 @@
   import { fade } from 'svelte/transition'
 
   import { getURL, postData } from '@/services/connect'
-  import { _ } from '@/services/i18n'
+  import { t } from '@/services/i18n'
   import { activeProject, settings, wsIO } from '@/store/app.store'
   import { vscode } from '@/store/vscode.store'
   import { logger } from '@/services/logger'
@@ -115,14 +115,14 @@
 <svelte:window on:keydown="{keyDown}" />
 
 <div class="{ [1, 3, undefined].includes(_colorTheme) ? 'light' : 'dark' }">
-  <h2 on:click={toggle}>{$_('comments.comments')} ({ commentCount })
+  <h2 on:click={toggle}>{$t('comments.comments')} ({ commentCount })
     <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
   </h2>
 
   <div class="comment-wrap">
 
   {#await loadPromise}
-    <p>{$_('loading')}</p>
+    <p>{$t('loading')}</p>
   {:then}
     {#if open}
       <ul in:fade="{{ delay: 100, duration: 90 }}" out:fade="{{ duration: 90 }}">
@@ -167,13 +167,13 @@
           <li><i class="link"></i></li>
           <li on:click="{closeCommentInput}"><i class="window-close"></i></li>
         </ul>
-        <button type="submit" class="btn btn-primary" on:click={submitComment}><i class="share-square"></i>{$_('send')}</button>
+        <button type="submit" class="btn btn-primary" on:click={submitComment}><i class="share-square"></i>{$t('send')}</button>
       </div>
-      <textarea bind:value={newComment} on:keyup={keyUp} placeholder="{$_('comments.typeYourComment')}" id="commentInput"></textarea>
+      <textarea bind:value={newComment} on:keyup={keyUp} placeholder="{$t('comments.typeYourComment')}" id="commentInput"></textarea>
     </div>
   {:else}
     <div class="comment-input" v-if="!isCommenting">
-        <button type="submit" class="btn btn-primary" on:click={showInput}><i class="share-square"></i>{$_('comment')}</button>
+        <button type="submit" class="btn btn-primary" on:click={showInput}><i class="share-square"></i>{$t('comment')}</button>
     </div>
   {/if}
 

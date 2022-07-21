@@ -4,7 +4,7 @@ import { settings, activeProject, mode, wsIO } from '@/store/app.store'
 import { tokens } from '@/store/user.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
 
-import { setupI18n } from '@/services/i18n'
+import i18n from '@/services/i18n'
 
 import WSIO from './wsio'
 import App from './App.svelte'
@@ -25,7 +25,7 @@ const DEBUG = IS_WEB && location.search.substr(6, 3) === 'd=1'
 const THEME = IS_WEB && location.search.substr(10, 2) === 'c=' && location.search.substr(12, 1)
 
 if (+THEME === 2) document.body.style.backgroundColor = '#000'
-setupI18n(EDITOR_LOCALE || 'en')
+i18n.setup(EDITOR_LOCALE || 'en')
 
 /****************************************************************
  * VSCode IPC

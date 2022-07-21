@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { _ } from '@/services/i18n'
   import { mode } from '@/store/app.store'
   import { activeProfile } from '@/store/user.store'
   import Comments from './comments.svelte'
@@ -17,7 +16,6 @@
   mode.subscribe(m => (activeMode = m))
 </script>
 
-<h1>ACTIVE MODE: {activeMode}</h1>
 {#if activeMode === 'repo'}
   <Search/>
   <div class="container">

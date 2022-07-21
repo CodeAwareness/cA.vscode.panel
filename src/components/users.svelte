@@ -4,7 +4,7 @@
   import config from '@/config'
   import { fade } from 'svelte/transition'
 
-  import { _ } from '@/services/i18n'
+  import { t } from '@/services/i18n'
   import { refreshUsers } from '@/services/users'
 
   import { activeProject, settings, wsIO } from '@/store/app.store'
@@ -98,7 +98,7 @@
 <div class="{ [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">
   <h2>
     <div on:click={toggle}>
-      {$_('users.contributors')} ({participants.length})
+      {$t('users.contributors')} ({participants.length})
       <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
     </div>
   </h2>
@@ -113,7 +113,7 @@
         </li>
       {/each}
       {#if !participants.length }
-        <li><i>{$_('users.noContributors')}</i></li>
+        <li><i>{$t('users.noContributors')}</i></li>
       {/if}
     </ul>
   {/if}

@@ -44,10 +44,8 @@
 <div>
   {#if showUX}
     {#if isAuthenticated}
-      <h1>AUTHENTICATED</h1>
       <Dashboard />
     {:else}
-      <h1>PLEASE LOGIN</h1>
       <div class="login">
         <Login />
       </div>

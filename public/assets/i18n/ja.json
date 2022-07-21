@@ -25,7 +25,9 @@
     "passwordAssist": "パスワード更新の案内をメールで送ります。",
     "passRequirements": "少なくとも8文字、１数字、１ローマ字",
     "dontHaveAccount": "アカウントはありません？",
-    "ClickToSignup": "新登録しましょう",
+    "clickToSignup": "新登録しましょう",
+    "resetPasswordWithEmail": "パスワードを更新するために、メールを送ります。",
+    "signUpWithEmail": "アカウント登録するために、メールアドレスとパスワードを入力してください。",
 
     "refresh": "再読込",
     "close": "閉じる",

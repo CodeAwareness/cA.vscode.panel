@@ -1,18 +1,16 @@
-import {
-  _,
-  register,
-  init,
-} from 'svelte-i18n'
+import { _, register, init } from 'svelte-i18n'
 import ky from 'ky'
-import config from '@/config'
-import { i18nReady, locale } from '@/store/app.store'
 
-async function setupI18n(lang = 'en') {
-  locale.set(lang)
+import config from '@/config'
+import { i18nReady } from '@/store/app.store'
+import { logger } from '@/services/logger'
+
+async function setup(lang = 'en'): Promise<any> {
   init({
     fallbackLocale: 'en',
     initialLocale: lang,
   })
+  logger.log('INIT i18n', lang)
   const dictPromise = ky.get(`${config.EXT_SERVER}/assets/i18n/${lang}.json?t=${new Date().toISOString()}`).json()
     .then(response => {
       i18nReady.set(true)
@@ -26,4 +24,9 @@ async function setupI18n(lang = 'en') {
   return dictPromise
 }
 
-export { _, setupI18n }
+export const t = _
+
+export default {
+  _,
+  setup
+}

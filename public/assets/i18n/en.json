@@ -12,8 +12,8 @@
   "pleaseWait": "please wait...",
   "or": "or",
   "auth": {
-    "title": "Code Awareness (vscode)",
-    "signUp": "CodeAwareness - signup",
+    "title": "Code Awareness",
+    "signUp": "CodeAwareness",
     "login": "Login",
     "loggingIn": "Logging in",
     "loginWith": "Or sign in with:",
@@ -26,7 +26,9 @@
     "passwordAssist": "We'll send you an email with instructions on how to change your password.",
     "passRequirements": "At least one number and one letter. Minimum 8 characters.",
     "dontHaveAccount": "Don't have an account? ",
-    "ClickToSignup": "Click here to sign up.",
+    "clickToSignup": "Click here to sign up.",
+    "resetPasswordWithEmail": "Please type your account email address, to reset your password.",
+    "signUpWithEmail": "Please create an account with your email and a password",
 
     "refresh": "Refresh",
     "close": "Close",

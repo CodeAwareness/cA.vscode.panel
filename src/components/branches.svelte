@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from '@/services/i18n'
+  import { t } from '@/services/i18n'
   import { activeProject, settings } from '@/store/app.store'
   import { selectedBranch, selectedContributor } from '@/store/contributors.store'
   import { vscode } from '@/store/vscode.store'
@@ -50,7 +50,7 @@
 <div class="{ [1, 3, undefined].includes(_colorTheme) ? 'light' : 'dark' }">
   <h2>
     <div on:click={toggle}>
-      {$_('branches.branches')} ({branches.length})
+      {$t('branches.branches')} ({branches.length})
       <span class="{ open ? 'fas fa-chevron-down' : 'fas fa-chevron-right' }"></span>
     </div>
     <div on:click={refresh}>
