@@ -9,7 +9,7 @@ const common = merge([
       path: path.resolve(process.cwd(), 'dist')
     },
   },
-  parts.page({ title: 'CodeAwareness VSCode panel' }),
+  parts.htmlFromTemplate(mode),
   parts.loadSvg(),
   parts.svelte(mode),
   parts.extractCSS({ loaders: [parts.postcss()] }),

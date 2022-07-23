@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { WebpackPluginServe } = require('webpack-plugin-serve')
 const DotenvPlugin = require('dotenv-webpack')
@@ -34,6 +35,17 @@ exports.copyAssets = () => ({
 // clean dist directory on build
 exports.cleanDist = () => ({
   plugins: [new CleanWebpackPlugin()],
+})
+
+exports.htmlFromTemplate = (mode) => ({
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'CodeAwareness: VSCode panel',
+      publicPath: '/',
+      template: path.resolve(__dirname, mode === 'production' ? '../src/prod.template.html' : '../src/dev.template.html'),
+      filename: 'index.html',
+    }),
+  ]
 })
 
 // show a nice progress bar in the terminal
@@ -71,10 +83,6 @@ exports.optimize = () => ({
     runtimeChunk: { name: 'runtime' },
     minimizer: ['...', new CssMinimizerPlugin()],
   },
-})
-
-exports.page = ({ title }) => ({
-  plugins: [new MiniHtmlWebpackPlugin({ publicPath: '/', context: { title } })],
 })
 
 exports.generateSourceMaps = ({ type }) => ({ devtool: type })
