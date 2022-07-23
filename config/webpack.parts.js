@@ -45,10 +45,16 @@ exports.devServer = () => ({
   watch: true,
   plugins: [
     new WebpackPluginServe({
+      client: { address: 'localhost:3080', protocol: 'wss' },
       port: 3080,
       host: '127.0.0.1',
       static: path.resolve(process.cwd(), 'dist'),
       historyFallback: true,
+      publicPath: 'https://localhost:8885',
+      ramdisk: true,
+      middleware: (app, builtins) => {
+        app.use(builtins.proxy('/socket.io', { target: 'https://localhost:3080' }))
+      },
       https: {
         key: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/localhost.key'),
         cert: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/localhost.crt'),
@@ -157,7 +163,6 @@ exports.svelte = mode => {
                 dev: !prod,
               },
               emitCss: prod,
-              hotReload: !prod,
               preprocess: preprocess({
                 postcss: true,
               }),

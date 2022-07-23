@@ -34,7 +34,7 @@ export class WSIO {
 
     logger.log('initializing sockets')
     this.rootSocket.on('connect', () => {
-      logger.log('rootSocket CONNECT')
+      logger.log('rootSocket connected')
       connectNamespace('users')
         .then((socket: CΩSocket) => {
           socket.on('connect', () => { logger.log('socketUser connected') })
@@ -93,7 +93,7 @@ export class WSIO {
 
 function connectNamespace(nsp: string) {
   logger.log(`will setup namespace ${nsp}`)
-  const socket = io(`/${nsp}`)
+  const socket = io(`${config.SERVER_WSS}/${nsp}`)
 
   socket.on('connection', () => {
     logger.log(`${nsp} socket connection ready`)
