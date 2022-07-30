@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade } from 'svelte/transition'
-   import { onDestroy } from 'svelte'
+  import { onDestroy } from 'svelte'
+  import { vscode } from '@/store/vscode.store'
 
   import config from '@/config'
   import type WSIO from '@/wsio'
@@ -10,7 +11,6 @@
 
   import { wsIO, settings } from '@/store/app.store'
   import { user, tokens } from '@/store/user.store'
-  import { vscode } from '@/store/vscode.store'
   import { addToast } from "@/store/toast.store"
 
   let colorTheme = 1
@@ -20,13 +20,21 @@
   let password = 'qwe12309'
   let wsEngine: WSIO
 
+  const vscodeAuth = data => {
+    const key = 'auth:login',
+    const command = 'event'
+    vscode.API.postMessage({ command, key, data })
+  }
+
   const wsSub = wsIO.subscribe(val => {
     wsEngine = val
-    wsEngine?.uSocket
+    if (!wsEngine?.uSocket) return
+    wsEngine.uSocket
         .transmit('auth:info')
         .then(data => {
           user.set(data.user || null)
           tokens.set(data.tokens || null)
+          vscodeAuth(data)
         })
         .catch(err => {
           logger.info('Not logged in yet', err)
@@ -49,6 +57,7 @@
       .transmit('auth:login', { strategy: 'local', email, password })
       .then(data => {
         storeAuthInfo(data)
+        vscodeAuth(data)
       })
       .catch(err => {
         logger.error(err.message)
