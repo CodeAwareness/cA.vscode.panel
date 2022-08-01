@@ -1,7 +1,6 @@
 import { logger } from '@/services/logger'
 import { vscode } from '@/store/vscode.store'
 import { settings, activeProject, mode, wsIO } from '@/store/app.store'
-import { tokens } from '@/store/user.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
 
 import i18n from '@/services/i18n'
@@ -48,7 +47,6 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
  ****************************************************************/
 mode.set('repo')
 const wsEngine = new WSIO()
-wsEngine.init()
 wsIO.set(wsEngine)
 
 let ap
@@ -58,6 +56,7 @@ window.addEventListener('error', vsCodeErrorListener)
 window.addEventListener('message', peer8Event)
 
 function vsCodeErrorListener(event) {
+  // TODO: send this to the Gardener instead, not sure if VSCode can do anything about it.
   vscode.API.postMessage({
     command: 'alert',
     text: event.message,
@@ -72,11 +71,9 @@ function peer8Event(event) {
   const { command, data } = event.data
   logger.log('Received peer8 event', command, data)
   switch (command) {
-    case 'setToken':
-      logger.info('setToken')
-      if (data.tokens) {
-        tokens.set(data.tokens)
-      }
+    case 'wss-guid':
+      logger.info('received WSS GUID', data)
+      wsEngine.guid = data
       break
 
     case 'setColorTheme':

@@ -1,5 +1,7 @@
 import type { Socket } from 'socket.io-client'
 import io from 'socket.io-client'
+import { nanoid } from 'nanoid'
+
 import config from '@/config'
 
 import { logger } from '@/services/logger'
@@ -14,6 +16,7 @@ export class WSIO {
   public rootSocket: CΩSocket
   public uSocket: CΩSocket
   public rSocket: CΩSocket
+  public guid: string
 
   private _delay: number
   private expDelay(): number {
@@ -23,6 +26,15 @@ export class WSIO {
 
   private resetDelay() {
     this._delay = 200
+  }
+
+  public constructor() {
+    this._delay = 200
+    this.rootSocket = null
+    this.uSocket = null
+    this.rSocket = null
+    this.guid = nanoid()
+    this.init()
   }
 
   public init(): void {
