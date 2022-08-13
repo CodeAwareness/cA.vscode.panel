@@ -11,7 +11,7 @@
 
   import { wsIO, settings } from '@/store/app.store'
   import { user, tokens } from '@/store/user.store'
-  import { addToast } from "@/store/toast.store"
+  import { success, failure } from "@/store/toast.store"
 
   let colorTheme = 1
   let isLoading = false
@@ -61,7 +61,7 @@
       })
       .catch(err => {
         logger.error(err.message)
-        addToast(`Login failed ! \r${apiError(err)}`, 'error')
+        failure(`Login failed ! \r${apiError(err)}`)
       })
       .finally(() => {
         isLoading = false
@@ -75,7 +75,7 @@
       .then(auth)
       .catch(err => {
         logger.error('Cannot register new account.', err)
-        addToast(`Registration failed. \r${apiError(err)}`, 'error')
+        failure(`Registration failed. \r${apiError(err)}`)
       })
       .finally(() => {
         isLoading = false
@@ -87,10 +87,10 @@
     wsEngine.uSocket
       .transmit('auth:sendPasswordReset', { email })
       .then(() => {
-        addToast('Please check your email to reset your password.', 'success')
+        success('Please check your email to reset your password.', 'success')
       })
       .catch(err => {
-        addToast(`Could not send email. \r${apiError(err)}`, 'error')
+        failure(`Could not send email. \r${apiError(err)}`)
       })
       .finally(() => {
         isLoading = false

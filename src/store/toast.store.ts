@@ -1,27 +1,25 @@
-import { writable } from 'svelte/store'
+import { toast } from '@zerodevx/svelte-toast'
 
-export const toasts = writable([])
-
-export const dismissToast = (id: number): void => {
-  toasts.update((all) => all.filter((t) => t.id !== id))
-}
-
-export const addToast = (message: string, type?: string, dismissible?: boolean, timeout?: number): void => {
-  // Create a unique ID so we can easily find/remove it
-  // if it is dismissible/has a timeout.
-  const id = Math.floor(Math.random() * 10000)
-
-  // Setup some sensible defaults for a toast.
-  const props = {
-    id,
-    message,
-    type: type || 'info',
-    timeout: timeout || 4000,
-    dismissible: true,
+export const success = m => toast.push(m, {
+  theme: {
+    '--toastBackground': 'green',
+    '--toastColor': 'white',
+    '--toastBarBackground': 'olive'
   }
-  if (dismissible !== undefined) props.dismissible = dismissible
+})
 
-  toasts.update((all) => [props, ...all])
+export const warning = m => toast.push(m, {
+  theme: {
+    '--toastBackground': 'yellow',
+    '--toastColor': 'black',
+    '--toastBarBackground': 'olive'
+  }
+})
 
-  if (props.timeout && props.dismissible) setTimeout(() => dismissToast(id), props.timeout)
-}
+export const failure = m => toast.push(m, {
+  theme: {
+    '--toastBackground': 'red',
+    '--toastColor': 'white',
+    '--toastBarBackground': 'olive'
+  }
+})
