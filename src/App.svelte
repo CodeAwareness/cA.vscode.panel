@@ -34,7 +34,6 @@
     width: 100%;
     /* zoom: 0.8; */
     margin: 0 auto;
-    font-size: 80%;
   }
 
   .light {
