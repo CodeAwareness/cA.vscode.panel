@@ -35,6 +35,7 @@
           user.set(data.user || null)
           tokens.set(data.tokens || null)
           vscodeAuth(data)
+          console.log('AUTH INFO COMPLETE', data)
         })
         .catch(err => {
           logger.info('Not logged in yet', err)

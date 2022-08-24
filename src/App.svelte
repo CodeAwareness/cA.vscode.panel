@@ -11,6 +11,7 @@
   let toastOptions = {
     intro: { y: 256 }
   }
+
 </script>
 
 <main class="{ _colorTheme }">
