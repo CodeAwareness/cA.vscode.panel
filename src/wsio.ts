@@ -61,6 +61,10 @@ export class WSIO {
           this.rSocket = socket
         })
     })
+
+    this.rootSocket.on('disconnect', () => {
+      this.rootSocket!.connect()
+    })
   }
 
   /*
@@ -75,9 +79,13 @@ export class WSIO {
       return new Promise((resolve, reject) => {
         this.resetDelay()
         const pendingConnection: any = () => {
+          if (handled) return
           logger.info(`Transient.client: pending connection (delay: ${this._delay})`)
           setTimeout(() => {
-            if (!handled) reject({ message: 'Request timed out' })
+            if (!handled) {
+              handled = true
+              reject({ message: 'Request timed out' })
+            }
           }, options?.timeout || 3000)
           if (!wsocket.connected) {
             setTimeout(pendingConnection, this.expDelay())
