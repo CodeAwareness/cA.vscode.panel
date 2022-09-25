@@ -194,6 +194,16 @@
       margin-left: 10px;
       color: #607D8B;
     }
+
+    &::before{
+      content:"";
+      display:inline-block;
+      width:1em;
+      height: .9em;
+      margin-right: 5px;
+      background:url(https://ext.codeawareness.com/images/icons/comment-alt-regular.svg) no-repeat;
+      background-size:contain;
+    }
   }
   textarea {
     border: 1px solid #9E9E9E;
@@ -352,39 +362,39 @@
   }
 
   .chevron-down {
-    background: url(https://ext.peer8.com/images/icons/chevron-down-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
   }
 
   .chevron-right {
-    background: url(https://ext.peer8.com/images/icons/chevron-right-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
   }
 
   .clock {
-    background: url(https://ext.peer8.com/images/icons/clock-regular.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/clock-regular.svg) no-repeat;
   }
 
   .share-square {
-    background: url(https://ext.peer8.com/images/icons/share-square-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/share-square-solid.svg) no-repeat;
   }
 
   .reply {
-    background: url(https://ext.peer8.com/images/icons/reply-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/reply-solid.svg) no-repeat;
   }
 
   .link {
-    background: url(https://ext.peer8.com/images/icons/link-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/link-solid.svg) no-repeat;
   }
 
   .smile {
-    background: url(https://ext.peer8.com/images/icons/smile-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/smile-solid.svg) no-repeat;
   }
 
   .pen {
-    background: url(https://ext.peer8.com/images/icons/pen-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/pen-solid.svg) no-repeat;
   }
 
   .trash {
-    background: url(https://ext.peer8.com/images/icons/trash-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/trash-solid.svg) no-repeat;
   }
 
 </style>

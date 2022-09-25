@@ -52,26 +52,13 @@
   // TODO: unsubscribe ( needed ? )
   contributors.subscribe(value => {
     if (!value) return (participants = [])
-    let needsRefresh
-    const pids = Object.keys(value).filter(pid => pid !== 'alines')
     selUsers = {}
     /* eslint-disable-next-line array-callback-return */
-    pids.map(pid => {
-      const p = value[pid]
-      p.user = pid
-      selUsers[pid] = 0
-      needsRefresh = needsRefresh || !value[pid].email
+    participants = value.map(contrib => {
+      contrib.user = contrib._id
+      selUsers[contrib._id] = 0
+      return contrib
     })
-    if (needsRefresh) {
-      refreshUsers(pids).then(({ data }) => {
-        participants = data.results || []
-        /* eslint-disable-next-line array-callback-return */
-        participants.map(p => {
-          p.s = value[p._id].s
-          p.k = value[p._id].k
-        })
-      })
-    }
   })
 
   function selectContributor(ct) {
@@ -106,7 +93,7 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar}" alt="Profile avatar" on:click="{selectContributor(ct)}" />
+          <img src="{ct.avatar || 'https://ext.codeawareness.com/images/icons/user-solid.svg'}" alt="Profile avatar" on:click="{selectContributor(ct)}" />
           <div on:click="{showProfile(ct)}">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>
@@ -145,11 +132,21 @@
       margin-right: 1em;
     }
 
+    &::before{
+      content:"";
+      display:inline-block;
+      width:1em;
+      height: .9em;
+      margin-right: 5px;
+      background:url(https://ext.codeawareness.com/images/icons/users-solid.svg) no-repeat;
+      background-size:contain;
+    }
+
     .chevron-down {
       width: 1em;
       height: 1em;
       padding: 0 0.5em;
-      background: url(https://ext.peer8.com/images/icons/chevron-down-solid.svg) no-repeat;
+      background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
       background-size: contain;
     }
 
@@ -157,7 +154,7 @@
       width: 1em;
       height: 1em;
       padding: 0 0.5em;
-      background: url(https://ext.peer8.com/images/icons/chevron-right-solid.svg) no-repeat;
+      background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
       background-size: contain;
     }
 
@@ -214,7 +211,7 @@
     width: 1em;
     height: 1em;
     padding: 0 0.5em;
-    background: url(https://ext.peer8.com/images/icons/id-card-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/images/icons/id-card-solid.svg) no-repeat;
     background-size: contain;
   }
 </style>

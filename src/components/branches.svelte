@@ -94,7 +94,7 @@
       width:1em;
       height: .9em;
       margin-right: 5px;
-      background:url(https://ext.peer8.com/images/icons/code-branch-solid.svg) no-repeat;
+      background:url(https://ext.codeawareness.com/images/icons/code-branch-solid.svg) no-repeat;
       background-size:contain;
     }
 

@@ -63,6 +63,17 @@ function vsCodeErrorListener(event) {
   })
   return false
 }
+/************************************************************************************
+ * get contributors for the current file
+ *
+ * Retrieve all users who have touched the file since the common SHA.
+ * The file in question is the activePath, showing in the focussed editor.
+ ************************************************************************************/
+function getActiveContributors(project) {
+  const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
+  const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
+  return project.contributors[relativePath]
+}
 
 /****************************************************************
  * Repo IPC (VSCode)
@@ -91,9 +102,10 @@ function peer8Event(event) {
       selectedContributor.set(data.selectedContributor)
       break
 
-    case 'selectProject':
-      logger.info('selectProject')
-      activeProject.set(data.activeProject)
+    case 'setProject':
+      logger.info('setProject')
+      activeProject.set(data)
+      contributors.set(getActiveContributors(data))
       break
 
     case 'setBranches':
