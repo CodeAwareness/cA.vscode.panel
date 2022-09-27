@@ -16,7 +16,7 @@
   let colorTheme = 1
   let isLoading = false
   let stage = 'login'
-  let email = 'hana@peer8.com'
+  let email = 'mark@peer8.com'
   let password = 'qwe12309'
   let wsEngine: WSIO
 

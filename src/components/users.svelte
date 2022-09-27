@@ -55,7 +55,6 @@
     selUsers = {}
     /* eslint-disable-next-line array-callback-return */
     participants = value.map(contrib => {
-      contrib.user = contrib._id
       selUsers[contrib._id] = 0
       return contrib
     })
@@ -74,7 +73,6 @@
     Object.keys(selUsers).map(id => (selUsers[id] = 0))
     selUsers[ct._id] = 1
     vscode.API.postMessage({ command: 'event', key: 'contrib:select', data: ct })
-    // localService.selectContributor(ct)
   }
 
   // Toggle
