@@ -72,7 +72,11 @@ function vsCodeErrorListener(event) {
 function getActiveContributors(project) {
   const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
   const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
-  const contributors = project.contributors[relativePath]
+  const contributors = Object
+    .keys(project.changes[relativePath] || {})
+    .filter(k => k !== 'alines')
+    .map(uid => project.contributors[uid])
+
   contributors?.forEach(contrib => {
     contrib.changes = project.changes[relativePath][contrib._id]
   })
