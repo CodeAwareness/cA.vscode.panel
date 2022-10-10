@@ -38,6 +38,7 @@ export class WSIO {
   }
 
   public init(): void {
+    logger.log('initializing WSS on', config.SERVER_WSS)
     this.rootSocket = io(config.SERVER_WSS, {
       reconnectionDelayMax: 10000,
       timestampRequests: true,

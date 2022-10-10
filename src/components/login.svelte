@@ -16,8 +16,8 @@
   let colorTheme = 1
   let isLoading = false
   let stage = 'login'
-  let email = 'mark@peer8.com'
-  let password = 'qwe12309'
+  let email = ''
+  let password = ''
   let wsEngine: WSIO
 
   const vscodeAuth = data => {
@@ -98,7 +98,7 @@
       })
   }
 
-  logger.log('API:', `${config.SERVER_URL}/v1/log/log`)
+  logger.log('API:', `${config.SERVER_URL}/logger/log`)
 
 </script>
 
