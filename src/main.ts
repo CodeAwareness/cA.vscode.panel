@@ -55,6 +55,10 @@ activeProject.subscribe(val => (ap = val))
 window.addEventListener('error', vsCodeErrorListener)
 window.addEventListener('message', peer8Event)
 
+/* Remove loading message from VSCode webpanel */
+const panelLoading = document.getElementById('panelLoading')
+if (panelLoading) panelLoading.style.display = 'none'
+
 function vsCodeErrorListener(event) {
   // TODO: send this to the Gardener instead, not sure if VSCode can do anything about it.
   vscode.API.postMessage({
