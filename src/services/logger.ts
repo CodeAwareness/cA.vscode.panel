@@ -5,27 +5,27 @@ import config from '@/config'
 /* eslint-disable no-console */
 const logger = {
   log: function(...args: any[]): void {
-    console.log('PeerWeb.', _.map(args, JSON.stringify))
+    console.log('cΩ.web.', _.map(args, JSON.stringify))
     args.unshift('VSCode')
     postData(`${config.SERVER_URL}/logger/log`, args)
   },
   info: function(...args: any[]): void {
-    console.info('PeerWeb.', _.map(args, JSON.stringify))
+    console.info('cΩ.web.', _.map(args, JSON.stringify))
     args.unshift('VSCode')
     postData(`${config.SERVER_URL}/logger/info`, args)
   },
   warn: function(...args: any[]): void {
-    console.warn('PeerWeb.', _.map(args, JSON.stringify))
+    console.warn('cΩ.web.', _.map(args, JSON.stringify))
     args.unshift('VSCode')
     postData(`${config.SERVER_URL}/logger/warn`, args)
   },
   debug: function(...args: any[]): void {
-    console.info('PeerWeb.', _.map(args, JSON.stringify))
+    console.info('cΩ.web.', _.map(args, JSON.stringify))
     args.unshift('VSCode')
     postData(`${config.SERVER_URL}/logger/debug`, args)
   },
   error: function(...args: any[]): void {
-    console.error('PeerWeb.', _.map(args, JSON.stringify))
+    console.error('cΩ.web.', _.map(args, JSON.stringify))
     args.unshift('VSCode')
     postData(`${config.SERVER_URL}/logger/error`, args)
   },
