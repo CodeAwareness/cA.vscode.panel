@@ -4,12 +4,12 @@
   import { vscode } from '@/store/vscode.store'
 
   import config from '@/config'
-  import type WSIO from '@/wsio'
   import apiError from '@/services/api-error'
   import { t } from '@/services/i18n'
-  import { logger } from '@/services/logger'
+  import logger from '@/services/logger'
+  import CΩWS from '@/services/wsio'
 
-  import { wsIO, settings } from '@/store/app.store'
+  import { settings } from '@/store/app.store'
   import { user, tokens } from '@/store/user.store'
   import { success, failure } from "@/store/toast.store"
 
@@ -18,7 +18,6 @@
   let stage = 'login'
   let email = ''
   let password = ''
-  let wsEngine: WSIO
 
   const vscodeAuth = data => {
     const key = 'auth:login',
@@ -27,10 +26,7 @@
   }
 
   const wsSub = wsIO.subscribe(val => {
-    wsEngine = val
-    if (!wsEngine?.uSocket) return
-    wsEngine.uSocket
-        .transmit('auth:info')
+    CΩWS.transmit('auth:info')
         .then(data => {
           user.set(data.user || null)
           tokens.set(data.tokens || null)
@@ -54,8 +50,7 @@
 
   function auth() {
     isLoading = true
-    wsEngine.uSocket
-      .transmit('auth:login', { strategy: 'local', email, password })
+    CΩWS.transmit('auth:login', { strategy: 'local', email, password })
       .then(data => {
         storeAuthInfo(data)
         vscodeAuth(data)
@@ -85,8 +80,7 @@
 
   function resetPassword() {
     isLoading = true
-    wsEngine.uSocket
-      .transmit('auth:sendPasswordReset', { email })
+    CΩWS.transmit('auth:sendPasswordReset', { email })
       .then(() => {
         success('Please check your email to reset your password.', 'success')
       })

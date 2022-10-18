@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store'
-import type CΩSocket from '@/wsio'
 
 export const activeProject = writable({})
 
@@ -15,5 +14,3 @@ export const i18nReady = writable({})
 export const locale = writable('en')
 
 export const settings = writable({ colorTheme: 1 })
-
-export const wsIO = writable(null as CΩSocket)

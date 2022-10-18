@@ -8,7 +8,7 @@
   import { t } from '@/services/i18n'
   import { activeProject, settings, wsIO } from '@/store/app.store'
   import { vscode } from '@/store/vscode.store'
-  import { logger } from '@/services/logger'
+  import logger from '@/services/logger'
 
   export let comments = []
   export let commentCount = 0

@@ -1,9 +1,6 @@
 <script lang="ts">
-  // @ts-check
-  import type WSIO from '@/wsio'
-
   import { tokens } from '@/store/user.store'
-  import { i18nReady, wsIO } from '@/store/app.store'
+  import { i18nReady } from '@/store/app.store'
 
   import Login from './login.svelte'
   import Dashboard from './dashboard.svelte'
@@ -14,13 +11,6 @@
   tokens.subscribe((value: any) => {
     console.log('TOKENS', value)
     isAuthenticated = value && !!value.access
-  })
-
-  let wsEngine: WSIO
-  wsIO.subscribe(val => {
-    wsEngine = val
-    console.log('wsEngine', wsEngine)
-    wsEngine.rSocket?.on('updateAvailable', fetchDiffs)
   })
 
   i18nReady.subscribe((val) => setTimeout(() => (showUX = val), 100))

@@ -3,7 +3,7 @@ import ky from 'ky'
 
 import config from '@/config'
 import { i18nReady } from '@/store/app.store'
-import { logger } from '@/services/logger'
+import logger from '@/services/logger'
 
 async function setup(lang = 'en'): Promise<any> {
   init({

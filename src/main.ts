@@ -1,11 +1,12 @@
-import { logger } from '@/services/logger'
+import logger from '@/services/logger'
 import { vscode } from '@/store/vscode.store'
-import { settings, activeProject, mode, wsIO } from '@/store/app.store'
+import { settings, activeProject, mode } from '@/store/app.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
+import { Req } from '@/store/vscode.store'
 
+import CΩWS from '@/services/wsio'
 import i18n from '@/services/i18n'
 
-import WSIO from './wsio'
 import App from './App.svelte'
 
 import initData from './debug'
@@ -46,8 +47,6 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
  * - redirect error handler to VSCode
  ****************************************************************/
 mode.set('repo')
-const wsEngine = new WSIO()
-wsIO.set(wsEngine)
 
 let ap
 activeProject.subscribe(val => (ap = val))
@@ -88,16 +87,21 @@ function getActiveContributors(project) {
   return contributors
 }
 
+let requests: any
+Req.subscribe(val => {
+  requests = val
+})
+
 /****************************************************************
  * Repo IPC (VSCode)
  ****************************************************************/
 function peer8Event(event) {
-  const { command, data } = event.data
+  const { id, command, data } = event.data
   logger.log('Received peer8 event', command, data)
   switch (command) {
     case 'wss-guid':
-      logger.info('received WSS GUID', data)
-      wsEngine.guid = data
+      logger.info('WEBVIEW received WSS GUID', data)
+      CΩWS.init(data)
       break
 
     case 'setColorTheme':
@@ -132,8 +136,26 @@ function peer8Event(event) {
     case 'setMode':
       mode.set(data.mode)
       break
+
+    default:
+      // API call response
+      const index = requests.findIndex(e => e.id === id)
+      if (index === -1) {
+        logger.log('API response to a non existent request', id, command)
+        return
+      }
+      const { resolve, reject } = requests[index]
+      if (command.indexOf('res:') !== -1) resolve(data)
+      else reject(data)
+      requests.splice(index, 1)
   }
 }
+
+/** ping-pong to get the client GUID (enabling multiple instances) */
+vscode.API.postMessage({
+  command: 'event',
+  key: 'webview:loaded',
+})
 
 const app = new App({
   target: document.body,
