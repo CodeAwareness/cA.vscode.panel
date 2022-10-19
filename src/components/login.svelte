@@ -25,22 +25,8 @@
     vscode.API.postMessage({ command, key, data })
   }
 
-  const wsSub = wsIO.subscribe(val => {
-    CΩWS.transmit('auth:info')
-        .then(data => {
-          user.set(data.user || null)
-          tokens.set(data.tokens || null)
-          vscodeAuth(data)
-          console.log('AUTH INFO COMPLETE', data)
-        })
-        .catch(err => {
-          logger.info('Not logged in yet', err)
-        })
-  })
-
   const settingsSub = settings.subscribe(val => (colorTheme = val.colorTheme))
 
-  onDestroy(wsSub)
   onDestroy(settingsSub)
 
   function storeAuthInfo(data: any) {

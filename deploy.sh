@@ -1,5 +1,5 @@
 #!/bin/bash
-# yarn build
+yarn build
 cd dist
 tar czvf /Users/markvasile/Code/CodeAwareness/vscode.panel.tgz .
 cd ..
