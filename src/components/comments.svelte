@@ -6,7 +6,7 @@
 
   import { getURL, postData } from '@/services/connect'
   import { t } from '@/services/i18n'
-  import { activeProject, settings, wsIO } from '@/store/app.store'
+  import { activeProject, settings } from '@/store/app.store'
   import { vscode } from '@/store/vscode.store'
   import logger from '@/services/logger'
 
@@ -22,10 +22,6 @@
   let isCommenting = false
 
   let wsEngine: WSIO
-  wsIO.subscribe(val => {
-    wsEngine = val
-    wsEngine.rSocket?.on('newComment', addComment)
-  })
 
   const toggle = () => (open = !open)
 

@@ -7,7 +7,7 @@
   import { t } from '@/services/i18n'
   import { refreshUsers } from '@/services/users'
 
-  import { activeProject, settings, wsIO } from '@/store/app.store'
+  import { activeProject, settings } from '@/store/app.store'
   import { contributors, selectedBranch, selectedContributor } from '@/store/contributors.store'
   import { activeProfile } from '@/store/user.store'
   import { vscode } from '@/store/vscode.store'
@@ -21,10 +21,6 @@
   settings.subscribe(val => (colorTheme = val.colorTheme))
 
   let wsEngine: WSIO
-  wsIO.subscribe(val => {
-    wsEngine = val
-    wsEngine.uSocket?.on('cameOnline', cameOnline)
-  })
 
   function cameOnline(user) {
     console.log('USER CAME ONLINE', user)

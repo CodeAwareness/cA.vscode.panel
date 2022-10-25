@@ -42,6 +42,7 @@
         vscodeAuth(data)
       })
       .catch(err => {
+        console.log('AUTH ERR', err)
         logger.error(err.message)
         failure(`Login failed ! \r${apiError(err)}`)
       })
