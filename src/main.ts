@@ -145,8 +145,8 @@ function peer8Event(event) {
         return
       }
       const { resolve, reject } = requests[index]
-      if (command.indexOf('res:') !== -1) resolve(JSON.parse(data))
-      else reject(JSON.parse(data))
+      if (command.indexOf('res:') !== -1) resolve(data)
+      else reject(data)
       requests.splice(index, 1)
   }
 }
