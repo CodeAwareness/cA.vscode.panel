@@ -2,6 +2,7 @@ import logger from '@/services/logger'
 import { vscode } from '@/store/vscode.store'
 import { settings, activeProject, mode } from '@/store/app.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
+import { tokens, user } from '@/store/user.store'
 import { Req } from '@/store/vscode.store'
 
 import CΩWS from '@/services/wsio'
@@ -99,7 +100,12 @@ function peer8Event(event) {
   const { id, command, data } = event.data
   logger.log('Received peer8 event', command, data)
   switch (command) {
-    case 'wss-guid':
+    case 'authInfo':
+      tokens.set(data.tokens)
+      user.set(data.user)
+      break
+
+    case 'wssGuid':
       logger.info('WEBVIEW received WSS GUID', data)
       CΩWS.init(data)
       break

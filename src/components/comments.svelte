@@ -21,8 +21,6 @@
   let open = true
   let isCommenting = false
 
-  let wsEngine: WSIO
-
   const toggle = () => (open = !open)
 
   settings.subscribe(val => { logger.log('COLOR IS NOW', val); _colorTheme = val.colorTheme })

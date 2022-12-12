@@ -20,8 +20,6 @@
 
   settings.subscribe(val => (colorTheme = val.colorTheme))
 
-  let wsEngine: WSIO
-
   function cameOnline(user) {
     console.log('USER CAME ONLINE', user)
   }
@@ -87,7 +85,7 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar || 'https://ext.codeawareness.com/images/icons/user-solid.svg'}" alt="Profile avatar" on:click="{selectContributor(ct)}" />
+          <img src="{ct.avatar || 'https://ext.codeawareness.com/images/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectContributor(ct)}" />
           <div on:click="{showProfile(ct)}">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>

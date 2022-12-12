@@ -53,8 +53,7 @@
 
   function signup() {
     isLoading = true
-    wsEngine.uSocket
-      .transmit('auth:signup', { email, password })
+    CΩWS.transmit('auth:signup', { email, password })
       .then(auth)
       .catch(err => {
         logger.error('Cannot register new account.', err)
