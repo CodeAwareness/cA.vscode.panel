@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import config from '@/config'
+import type { TTokens } from '@/store/user.store'
 import { tokens, user } from '@/store/user.store'
 
 declare module 'axios' {
@@ -17,9 +18,9 @@ declare module 'axios' {
 
 const axiosAPI = axios.create({ baseURL: config.SERVER_URL })
 
-let _tokens
+let _tokens: TTokens
 
-tokens.subscribe(val => {
+tokens.subscribe((val: TTokens) => {
   _tokens = val
 })
 
@@ -37,29 +38,29 @@ axiosAPI.interceptors.response.use(response => response, err => {
     if (err.response.status === 401 && err.config && err.response.config.url !== `${config.SERVER_URL}/auth/refresh-tokens`) {
       if (!_tokens) return logout(reject, 'No tokens in the store.')
       const { refresh } = _tokens
-      if (!refresh || refresh.expires < new Date().valueOf()) return logout(reject, 'Refresh token expired ' + refresh.expires)
+      if (new Date(refresh?.expires || 0).valueOf() < new Date().valueOf()) {
+        return logout(reject, 'Refresh token expired ' + refresh.expires)
+      }
       return refreshToken(refresh.token)
         .then(data => {
           const { token } = data.access
           err.config.headers.Authorization = `Bearer ${token}`
           axiosAPI(err.config).then(resolve, reject)
         })
-        .catch(err => {
-          return logout(reject, err)
-        })
+        .catch(err => logout(reject, err))
     }
-    return reject(err)
+    reject(err)
   })
 })
 
-function logout(reject?: any, err?: string): any {
+function logout(reject?: (err: Error) => void, err?: string): boolean | void {
   user.set(null)
   tokens.set(null)
 
   return reject && reject(new Error(err || 'You have been logged out'))
 }
 
-function refreshToken(refreshToken: string): Promise<any> {
+function refreshToken(refreshToken: string): Promise<TTokens> {
   return axiosAPI
     .post(`${config.SERVER_URL}/auth/refresh-tokens`, { refreshToken })
     .then(res => {
@@ -68,12 +69,12 @@ function refreshToken(refreshToken: string): Promise<any> {
     })
 }
 
-const postData = (url: string, data: unknown): Promise<any> => {
+const postData = (url: string, data: unknown): Promise<unknown> => {
   const headers = { 'Content-Type': 'application/json' }
   return axiosAPI.post(url, data, headers)
 }
 
-const getURL = (url: string): Promise<any> => {
+const getURL = (url: string): Promise<unknown> => {
   const { access } = _tokens
   if (!access) return Promise.reject(new Error('Unauthorized'))
   return axiosAPI(url, {
