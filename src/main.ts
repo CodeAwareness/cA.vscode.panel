@@ -1,11 +1,10 @@
 import logger from '@/services/logger'
-import { vscode } from '@/store/vscode.store'
+import { vscode, Req } from '@/store/vscode.store'
 import { settings, activeProject, mode } from '@/store/app.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
 import { tokens, user } from '@/store/user.store'
-import { Req } from '@/store/vscode.store'
 
-import CΩWS from '@/services/wsio'
+import CΩWS, { type TWSRequest } from '@/services/wsio'
 import i18n from '@/services/i18n'
 
 import App from './App.svelte'
@@ -15,8 +14,7 @@ import initData from './debug'
 declare global {
   interface Window {
     EDITOR_LOCALE: string
-    acquireVsCodeApi: Function
-    peer8: any
+    acquireVsCodeApi: () => { postMessage: () => void }
   }
 }
 
@@ -35,9 +33,9 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
   /* eslint-disable-next-line no-undef */
   ? window.acquireVsCodeApi()
   : {
-    postMessage: function postMessage() {
-      logger.log('POST MESSAGE TO VSCODE', arguments)
-      if (DEBUG && arguments[0] && arguments[0].key === 'initialized') peer8Event({ command: 'initWithData', data: initData })
+    postMessage: function postMessage(...args) {
+      logger.log('POST MESSAGE TO VSCODE', args)
+      if (DEBUG && args[0] && args[0].key === 'initialized') cΩEvent({ command: 'initWithData', data: initData })
     },
   }
 
@@ -53,7 +51,7 @@ let ap
 activeProject.subscribe(val => (ap = val))
 
 window.addEventListener('error', vsCodeErrorListener)
-window.addEventListener('message', peer8Event)
+window.addEventListener('message', cΩEvent)
 
 /* Remove loading message from VSCode webpanel */
 const panelLoading = document.getElementById('panelLoading')
@@ -88,7 +86,7 @@ function getActiveContributors(project) {
   return contributors
 }
 
-let requests: any
+let requests: TWSRequest[]
 Req.subscribe(val => {
   requests = val
 })
@@ -96,9 +94,9 @@ Req.subscribe(val => {
 /****************************************************************
  * Repo IPC (VSCode)
  ****************************************************************/
-function peer8Event(event) {
+function cΩEvent(event) {
   const { id, command, data } = event.data
-  logger.log('Received peer8 event', command, data)
+  logger.log('Received cΩ event', command, data)
   switch (command) {
     case 'authInfo':
       tokens.set(data.tokens)
@@ -144,16 +142,19 @@ function peer8Event(event) {
       break
 
     default:
-      // API call response
-      const index = requests.findIndex(e => e.id === id)
-      if (index === -1) {
-        logger.log('API response to a non existent request', id, command)
-        return
-      }
-      const { resolve, reject } = requests[index]
-      if (command.indexOf('res:') !== -1) resolve(data)
-      else reject(data)
-      requests.splice(index, 1)
+      apiCallResponse()
+  }
+
+  function apiCallResponse() {
+    const index = requests.findIndex(e => e.id === id)
+    if (index === -1) {
+      logger.log('API response to a non existent request', id, command)
+      return
+    }
+    const { resolve, reject } = requests[index]
+    if (command.indexOf('res:') !== -1) resolve(data)
+    else reject(data)
+    requests.splice(index, 1)
   }
 }
 

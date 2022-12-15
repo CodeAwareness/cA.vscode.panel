@@ -5,7 +5,7 @@ import config from '@/config'
 import { i18nReady } from '@/store/app.store'
 import logger from '@/services/logger'
 
-async function setup(lang = 'en'): Promise<any> {
+async function setup(lang = 'en'): Promise<unknown> {
   init({
     fallbackLocale: 'en',
     initialLocale: lang,
@@ -21,6 +21,7 @@ async function setup(lang = 'en'): Promise<any> {
     fallbackLocale: 'en',
     initialLocale: lang,
   })
+
   return dictPromise
 }
 
@@ -28,5 +29,5 @@ export const t = _
 
 export default {
   _,
-  setup
+  setup,
 }

@@ -8,10 +8,17 @@ module.exports = {
   },
   plugins: [
     'svelte3',
+    "@typescript-eslint",
   ],
-  extends: ['standard', 'plugin:jest/recommended', 'plugin:security/recommended'],
+  extends: [
+    'standard',
+    'plugin:jest/recommended',
+    'plugin:security/recommended',
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   parserOptions: {
-    ecmaVersion: 11,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
   overrides: [

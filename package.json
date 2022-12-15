@@ -6,7 +6,8 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config config/webpack.config.js --mode production",
     "build:analyze": "webpack --config config/webpack.config.js --mode production --analyze",
-    "dev": "webpack --config config/webpack.config.js --mode development"
+    "dev": "webpack --config config/webpack.config.js --mode development",
+    "lint": "eslint src --ext ts"
   },
   "keywords": [
     "vscode",
@@ -21,6 +22,8 @@
     "@babel/preset-env": "^7.18.10",
     "@sveltejs/eslint-config": "sveltejs/eslint-config",
     "@tsconfig/svelte": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",

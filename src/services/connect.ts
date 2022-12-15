@@ -60,14 +60,15 @@ function logout(reject?: any, err?: string): any {
 }
 
 function refreshToken(refreshToken: string): Promise<any> {
-  return axiosAPI.post(`${config.SERVER_URL}/auth/refresh-tokens`, { refreshToken })
+  return axiosAPI
+    .post(`${config.SERVER_URL}/auth/refresh-tokens`, { refreshToken })
     .then(res => {
       tokens.set(res.data.tokens)
       return res.data.tokens
     })
 }
 
-const postData = (url: string, data: any): Promise<any> => {
+const postData = (url: string, data: unknown): Promise<any> => {
   const headers = { 'Content-Type': 'application/json' }
   return axiosAPI.post(url, data, headers)
 }

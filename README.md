@@ -14,7 +14,9 @@ We're using Svelte JS here, to keep a minimal footprint ontop of VSCode, as well
 yarn
 ```
 
-### Development Run
+### Development
+
+To develop locally, you may want to run the web panel in a browser. This is a bit difficult as most functions require VSCode API, but it's a good idea to work on UX elements in the browser using mocked data. An experimental `debug.ts` is available for that purpose. The idea is that we should be able to show the panel in any state, upon refresh. The debug mock data is being loaded in the `main.ts` when a browser is detected.
 
 ```
 yarn dev
