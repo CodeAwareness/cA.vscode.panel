@@ -7,7 +7,7 @@
   import apiError from '@/services/api-error'
   import { t } from '@/services/i18n'
   import logger from '@/services/logger'
-  import CΩWS from '@/services/wsio'
+  import CAWWS from '@/services/wsio'
 
   import { settings } from '@/store/app.store'
   import { user, tokens } from '@/store/user.store'
@@ -36,7 +36,7 @@
 
   function auth() {
     isLoading = true
-    CΩWS.transmit('auth:login', { strategy: 'local', email, password })
+    CAWWS.transmit('auth:login', { strategy: 'local', email, password })
       .then(data => {
         storeAuthInfo(data)
         vscodeAuth(data)
@@ -53,7 +53,7 @@
 
   function signup() {
     isLoading = true
-    CΩWS.transmit('auth:signup', { email, password })
+    CAWWS.transmit('auth:signup', { email, password })
       .then(auth)
       .catch(err => {
         logger.error('Cannot register new account.', err)
@@ -66,7 +66,7 @@
 
   function resetPassword() {
     isLoading = true
-    CΩWS.transmit('auth:sendPasswordReset', { email })
+    CAWWS.transmit('auth:sendPasswordReset', { email })
       .then(() => {
         success('Please check your email to reset your password.', 'success')
       })

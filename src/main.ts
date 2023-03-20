@@ -4,7 +4,7 @@ import { settings, activeProject, mode } from '@/store/app.store'
 import { contributors, selectedContributor } from '@/store/contributors.store'
 import { tokens, user } from '@/store/user.store'
 
-import CΩWS, { type TWSRequest } from '@/services/wsio'
+import CAWWS, { type TWSRequest } from '@/services/wsio'
 import i18n from '@/services/i18n'
 
 import App from './App.svelte'
@@ -35,7 +35,7 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
   : {
     postMessage: function postMessage(...args) {
       logger.log('POST MESSAGE TO VSCODE', args)
-      if (DEBUG && args[0] && args[0].key === 'initialized') cΩEvent({ command: 'initWithData', data: initData })
+      if (DEBUG && args[0] && args[0].key === 'initialized') cawEvent({ command: 'initWithData', data: initData })
     },
   }
 
@@ -51,7 +51,7 @@ let ap
 activeProject.subscribe(val => (ap = val))
 
 window.addEventListener('error', vsCodeErrorListener)
-window.addEventListener('message', cΩEvent)
+window.addEventListener('message', cawEvent)
 
 /* Remove loading message from VSCode webpanel */
 const panelLoading = document.getElementById('panelLoading')
@@ -94,9 +94,9 @@ Req.subscribe(val => {
 /****************************************************************
  * Repo IPC (VSCode)
  ****************************************************************/
-function cΩEvent(event) {
+function cawEvent(event) {
   const { id, command, data } = event.data
-  logger.log('Received cΩ event', command, data)
+  console.log('Received caw event', command, data)
   switch (command) {
     case 'authInfo':
       tokens.set(data.tokens)
@@ -105,7 +105,7 @@ function cΩEvent(event) {
 
     case 'wssGuid':
       logger.info('WEBVIEW received WSS GUID', data)
-      CΩWS.init(data)
+      CAWWS.init(data)
       break
 
     case 'setColorTheme':

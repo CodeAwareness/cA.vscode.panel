@@ -8,19 +8,13 @@ We're using Svelte JS here, to keep a minimal footprint ontop of VSCode, as well
 
 ### Installation
 
-1. Clone the repo, install the dependencies.
-
-```bash
-yarn
-```
+You don't need to install this to run your VSCode extension. The VSCode web panel is available online, and maintained by us here at Code Awareness.
 
 ### Development
 
-To develop locally, you may want to run the web panel in a browser. This is a bit difficult as most functions require VSCode API, but it's a good idea to work on UX elements in the browser using mocked data. An experimental `debug.ts` is available for that purpose. The idea is that we should be able to show the panel in any state, upon refresh. The debug mock data is being loaded in the `main.ts` when a browser is detected.
+To start developing and customizing this web panel, just run `yarn dev` and have fun. When you change the code, you'll need to refresh VSCode (with the Developer Tools open hit CTRL + R or CMD + R on a Mac).
 
-```
-yarn dev
-```
+To develop slightly faster, we tried running the web panel in a browser. This is a bit difficult as most functions require VSCode API, but it's a good idea to work on UX elements in the browser using mocked data. An experimental `debug.ts` is available for that purpose. The idea is that we should be able to show the panel in any state, upon refresh. The debug mock data is being loaded in the `main.ts` when a browser is detected.
 
 ### Test
 
