@@ -31,14 +31,12 @@
   }
 </style>
 
-<div>
-  {#if showUX}
-    {#if isAuthenticated}
-      <Dashboard />
-    {:else}
-      <div class="login">
-        <Login />
-      </div>
-    {/if}
+{#if showUX}
+  {#if isAuthenticated}
+    <Dashboard />
+  {:else}
+    <div class="login">
+      <Login />
+    </div>
   {/if}
-</div>
+{/if}

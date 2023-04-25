@@ -5,6 +5,7 @@
 
   let _colorTheme = 'light'
   settings.subscribe(val => {
+    console.log('color theme', val)
     _colorTheme = [1, 3, undefined].includes(val.colorTheme) ? 'light' : 'dark'
   })
 
@@ -31,17 +32,64 @@
     font-family: 'Source Sans Pro', sans-serif;
   }
 
-  main {
-    width: 100%;
-    /* zoom: 0.8; */
-    margin: 0 auto;
-  }
-
-  .light {
+  :global(.light) {
     color: black;
+
+      :global(textarea) {
+        background-color: white;
+        color: black;
+      }
   }
 
-  .dark {
+  :global(.dark) {
     color: white;
+
+      :global(textarea) {
+        background-color: black;
+        color: white;
+      }
+  }
+
+  :global(.drop-section) {
+    display: inline-block;
+    font-size: 1em;
+    color: #175068;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    :global(div) {
+      display: inline-block;
+      margin-right: 1em;
+    }
+
+    &::before{
+      content:"";
+      display:inline-block;
+      width:1em;
+      height: .9em;
+      margin-right: 5px;
+      background-size:contain;
+    }
+
+    :global(.chevron-down) {
+      width: 1em;
+      height: 1em;
+      padding: 0 0.5em;
+      background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
+      background-size: contain;
+    }
+
+    :global(.chevron-right) {
+      width: 1em;
+      height: 1em;
+      padding: 0 0.5em;
+      background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
+      background-size: contain;
+    }
+
+    :global(span) {
+      margin-left: 10px;
+      color: #607D8B;
+    }
   }
 </style>

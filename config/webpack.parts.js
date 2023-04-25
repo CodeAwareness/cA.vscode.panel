@@ -159,6 +159,7 @@ exports.svelte = mode => {
       },
       extensions: ['.mjs', '.js', '.svelte', '.ts'],
       mainFields: ['svelte', 'browser', 'module', 'main'],
+      conditionNames: ['svelte'],
     },
     module: {
       rules: [

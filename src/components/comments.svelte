@@ -109,7 +109,7 @@
 <svelte:window on:keydown="{keyDown}" />
 
 <div class="{ [1, 3, undefined].includes(_colorTheme) ? 'light' : 'dark' }">
-  <h2 on:click={toggle}>{$t('comments.comments')} ({ commentCount })
+  <h2 class="drop-section" on:click={toggle}>{$t('comments.comments')} ({ commentCount })
     <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
   </h2>
 
@@ -153,23 +153,10 @@
 
   </div>
 
-  {#if isCommenting}
-    <div class="comment-input">
-      <div class="commentarea">
-        <ul class="submit-action">
-          <li><i class="smile"></i></li>
-          <li><i class="link"></i></li>
-          <li on:click="{closeCommentInput}"><i class="window-close"></i></li>
-        </ul>
-        <button type="submit" class="btn btn-primary" on:click={submitComment}><i class="share-square"></i>{$t('send')}</button>
-      </div>
-      <textarea bind:value={newComment} on:keyup={keyUp} placeholder="{$t('comments.typeYourComment')}" id="commentInput"></textarea>
-    </div>
-  {:else}
-    <div class="comment-input" v-if="!isCommenting">
-        <button type="submit" class="btn btn-primary" on:click={showInput}><i class="share-square"></i>{$t('comment')}</button>
-    </div>
-  {/if}
+  <div class="comment-input">
+    <textarea bind:value={newComment} on:keyup={keyUp} placeholder="{$t('comments.typeYourComment')}" id="commentInput"></textarea>
+    <button type="submit" class="btn btn-primary" on:click={submitComment}><i class="share-square"></i>{$t('send')}</button>
+  </div>
 
 </div>
 
@@ -177,190 +164,100 @@
   @import '../styles/variables.scss';
 
   h2 {
-    display: block;
-    display: inline-block;
-    font-size: 1em;
-    color: #EF71E5;
-    cursor: pointer;
-    margin-bottom: 0;
+      &::before{
+        background:url(https://ext.codeawareness.com/images/icons/comment-alt-regular.svg) no-repeat;
+      }
+  }
 
-    span {
-      margin-left: 10px;
-      color: #607D8B;
-    }
-
-    &::before{
-      content:"";
-      display:inline-block;
-      width:1em;
-      height: .9em;
-      margin-right: 5px;
-      background:url(https://ext.codeawareness.com/images/icons/comment-alt-regular.svg) no-repeat;
-      background-size:contain;
-    }
-  }
-  textarea {
-    border: 1px solid #9E9E9E;
-    min-width: 100%;
-    width: 100%;
-    height: 4em;
-    outline: none;
-    -webkit-transition: all .3s;
-    transition: all .2s;
-  }
-  textarea:focus {
-    box-shadow: 0 0 7px #1abc9c;
-    border: 1px solid #1abc9c;
-  }
-  button {
-    background: #aa3939;
-    color: white;
-    border-radius: 1em;
-    border: none;
-    margin-bottom: 5px;
-    margin-right: 1em;
-    padding: 0.5em 1em;
-  }
   ul li {
     margin-top: 0.5em;
     list-style: none;
 
-    div span {
-      padding-left: 1em;
-      color: $peer8-dark;
-    }
+      div span {
+        padding-left: 1em;
+        color: $peer8-dark;
+      }
   }
 
   .light {
     color: black;
 
-    .comment-input {
-      background: white;
-    }
-    hr {
-      border: 1px solid #eee;
-    }
+      .comment-input {
+        background: white;
+      }
+      hr {
+        border: 1px solid #eee;
+      }
   }
 
   .dark {
     color: white;
 
-    hr {
-      border: 1px solid #444;
-    }
-
-    ul li {
-      div span {
-        color: $peer8-light;
+      hr {
+        border: 1px solid #444;
       }
-    }
 
-    .comment-input {
-      background: black;
-    }
+      ul li {
+        div span {
+          color: $peer8-light;
+        }
+      }
+
+      .comment-input {
+        background: black;
+      }
   }
+
   .comment-wrap {
     padding: 15px;
     margin-bottom: 10em;
-  }
-  .comment-wrap::-webkit-scrollbar {
-    width: 7px;
-  }
-  .comment-wrap::-webkit-scrollbar-thumb {
-    background: linear-gradient(0deg,#43e2c6,#3183d0);
-    border-radius: 3px;
-  }
-  .comment-wrap::-webkit-scrollbar-track {
-    background: rgba(100,100,100, .3);
-  }
-  .comment-content {
-    display: flex;
-    margin: 1.5em 0 1em;
 
-    img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 80px;
-    }
-    ul {
-      margin: 0;
-      padding: 0;
-      margin-left: 10px;
-      list-style: none;
-
-      li {
-        margin: 0;
-        list-style: none;
-
-        span {
-          margin-left: 10px;
-          color: #2B91D8;
-        }
+      &::-webkit-scrollbar {
+        width: 7px;
       }
-    }
+
+      &::-webkit-scrollbar-thumb {
+        background: linear-gradient(0deg,#43e2c6,#3183d0);
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(100,100,100, .3);
+      }
   }
   .comment-input {
     position: fixed;
-    width: calc(100% - 16px);
+    width: calc(100% - 40px);
     bottom: 0;
-  }
-  .comment-action {
-    text-align: right;
-    margin-top: 0;
-    margin-bottom: 0;
 
-    li {
-      display: inline-block;
-      list-style: none;
-      margin: 0;
-      font-size: 0.8em;
-      text-align: right;
-      margin-left: 0;
-      color: #9E9E9E;
-    }
-    li:hover {
-      color: #FF5722;
-      cursor: pointer;
-    }
-  }
+      textarea {
+        border: 1px solid #9E9E9E;
+        width: calc(100% - 20px);
+        height: 4em;
+        outline: none;
+        -webkit-transition: all .3s;
+        transition: all .2s;
+        padding: 10px;
 
-  .commentarea {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-top: 3em;
-
-    ul {
-      padding-left: 0;
-    }
-
-    .submit-action {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      li {
-        display: inline-block;
-        list-style: none;
-        margin: 0;
-        font-size: 0.8em;
-        text-align: right;
-        margin-left: 1em;
-        color: #9E9E9E;
+          &:focus {
+            box-shadow: 0 0 7px #1abc9c;
+            border: 1px solid #1abc9c;
+          }
       }
-      li:hover {
-        color: #FF5722;
-        cursor: pointer;
+
+      button {
+        background: #aa3939;
+        color: white;
+        border-radius: 1em;
+        border: none;
+        margin-bottom: 5px;
+        margin-right: 1em;
+        padding: 0.5em 1em;
       }
-    }
-  }
 
-  .chevron-down {
-    background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
-  }
-
-  .chevron-right {
-    background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
+      @media screen and (min-width: 1024px){
+        width: 46%;
+      }
   }
 
   .clock {

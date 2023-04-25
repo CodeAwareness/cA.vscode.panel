@@ -75,8 +75,8 @@
 </script>
 
 <div class="{ [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">
-  <h2>
-    <div on:click={toggle}>
+  <h2 class="drop-section">
+    <div on:click={toggle} on:keyup="{toggle}" tabindex="0" role="button">
       {$t('users.contributors')} ({participants.length})
       <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
     </div>
@@ -85,8 +85,8 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar || 'https://ext.codeawareness.com/images/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectContributor(ct)}" />
-          <div on:click="{showProfile(ct)}">
+          <img src="{ct.avatar || 'https://ext.codeawareness.com/images/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectContributor(ct)}" on:keyup="{selectContributor(ct)}" />
+          <div on:click="{showProfile(ct)}" on:keyup="{showProfile(ct)}" tabindex="0" role="button">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>
         </li>
@@ -111,48 +111,8 @@
   }
 
   h2 {
-    display: block;
-    display: inline-block;
-    font-size: 1em;
-    color: #EF71E5;
-    cursor: pointer;
-    margin-bottom: 0;
-    width: 100%;
-
-    div {
-      display: inline-block;
-      margin-right: 1em;
-    }
-
     &::before{
-      content:"";
-      display:inline-block;
-      width:1em;
-      height: .9em;
-      margin-right: 5px;
       background:url(https://ext.codeawareness.com/images/icons/users-solid.svg) no-repeat;
-      background-size:contain;
-    }
-
-    .chevron-down {
-      width: 1em;
-      height: 1em;
-      padding: 0 0.5em;
-      background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
-      background-size: contain;
-    }
-
-    .chevron-right {
-      width: 1em;
-      height: 1em;
-      padding: 0 0.5em;
-      background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
-      background-size: contain;
-    }
-
-    span {
-      margin-left: 10px;
-      color: #607D8B;
     }
   }
   img {
@@ -186,6 +146,11 @@
     align-items: center;
     margin: 1em;
     margin-bottom: 20px;
+
+      img {
+        width: 2.5em;
+        height: auto;
+      }
 
     div:hover {
       background: #aa3939;

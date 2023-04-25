@@ -33,13 +33,4 @@
 
 <style lang="scss">
   @import '../styles/variables.scss';
-
-  @media screen and (min-width: 1024px){
-    .container {
-      width: 50%;
-      float: left;
-      padding: 0 25px;
-      box-sizing: border-box;
-    }
-  }
 </style>

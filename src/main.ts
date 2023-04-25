@@ -19,12 +19,24 @@ declare global {
 }
 
 const IS_WEB = /^http/.test(location.href) && location.search
-const EDITOR_LOCALE = IS_WEB ? location.search.substr(3, 2) : window.EDITOR_LOCALE || 'en'
-const DEBUG = IS_WEB && location.search.substr(6, 3) === 'd=1'
-const THEME = IS_WEB && location.search.substr(10, 2) === 'c=' && location.search.substr(12, 1)
+const query = location.search.substr(1).split('&').map(p => p.split('='))
+const params: Record<string, string> = {}
+query.map(p => params[p[0]] = p[1])
+const EDITOR_LOCALE = IS_WEB ? params.lang : window.EDITOR_LOCALE || 'en'
+const DEBUG = IS_WEB && params.debug
+const THEME = IS_WEB && params.color
 
 if (+THEME === 2) document.body.style.backgroundColor = '#000'
 i18n.setup(EDITOR_LOCALE || 'en')
+
+// For dev purposes
+let ignore_second_render
+const win = window as unknown as any
+if (!win.CAW_DEBUG) {
+  win.CAW_DEBUG = DEBUG
+} else {
+  ignore_second_render = true
+}
 
 /****************************************************************
  * VSCode IPC
@@ -35,7 +47,7 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
   : {
     postMessage: function postMessage(...args) {
       logger.log('POST MESSAGE TO VSCODE', args)
-      if (DEBUG && args[0] && args[0].key === 'initialized') cawEvent({ command: 'initWithData', data: initData })
+      if (DEBUG && args[0] && args[0].key === 'webview:loaded') cawEvent({ command: 'initWithData', data: initData })
     },
   }
 
@@ -74,6 +86,7 @@ function vsCodeErrorListener(event) {
 function getActiveContributors(project) {
   const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
   const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
+  console.log('CONTRIB', relativePath, project.changes)
   const contributors = Object
     .keys(project.changes[relativePath] || {})
     .filter(k => k !== 'alines')
@@ -141,6 +154,13 @@ function cawEvent(event) {
       mode.set(data.mode)
       break
 
+    case 'initWithData':
+      tokens.set(data.tokens)
+      user.set(data.user)
+      activeProject.set(data.activeProject)
+      contributors.set(getActiveContributors(data.activeProject))
+      settings.set({ colorTheme: parseInt(data.colorTheme) })
+
     default:
       apiCallResponse()
   }
@@ -164,7 +184,7 @@ vscode.API.postMessage({
   key: 'webview:loaded',
 })
 
-const app = new App({
+const app = ignore_second_render ? {} : new App({
   target: document.body,
   props: {},
 })
