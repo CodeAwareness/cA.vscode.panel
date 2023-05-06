@@ -83,9 +83,12 @@
 </script>
 
 {#if stage === 'login' }
-  <form on:submit|preventDefault={auth} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
-    <div class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">
-      <h2><img src="https://codeawareness.com/img/cA-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+  <form on:submit|preventDefault={auth}
+        in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
+        class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
+        >
+    <div class="login">
+      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <div>
         <div>
           <input type="text" placeholder="{$t('email')}" bind:value={email} />
@@ -138,7 +141,7 @@
 
   <form on:submit|preventDefault={resetPassword} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
     <div class="login">
-      <h2><img src="https://codeawareness.com/img/cA-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.resetPasswordWithEmail')}</h4>
       <div>
         <div>
@@ -165,7 +168,7 @@
 
   <form on:submit|preventDefault={signup} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
     <div class="login">
-      <h2><img src="https://codeawareness.com/img/cA-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.signUpWithEmail')}</h4>
       <div>
         <input type="text" placeholder="{$t('email')}" bind:value={email} />
@@ -203,6 +206,18 @@
     padding: 1em 2em;
     background: linear-gradient( 45deg, #b7dbe8, #ffebf0);
     filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.6));
+
+    &.dark {
+      background: transparent;
+
+      input {
+        color: white;
+      }
+
+      h2 {
+        color: $peer8-yellow;
+      }
+    }
 
     h2 {
       color: #204f67;
@@ -262,13 +277,12 @@
 
         &:focus {
           border-color: #1abc9c;
-          color: #5A5A5A;
-          font-weight: bold;
+          color: $peer8-yellow;
           outline: 0;
         }
 
         &[type="submit"]{
-          background: #F55A5A;
+          background: $marine;
           padding: 0.7em;
           border-radius: 1.5em;
           border: unset;
@@ -342,13 +356,10 @@
     }
 
     .light {
-
       h4 {
         color: black;
       }
-
     }
-
   }
 
   .center {

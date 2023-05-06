@@ -12,6 +12,8 @@ You don't need to install this to run your VSCode extension. The VSCode web pane
 
 ### Development
 
+Prerequisite: `npx office-addin-dev-certs install` to get https on localhost. After installation, restart nginx.
+
 To start developing and customizing this web panel, just run `yarn dev` and have fun. When you change the code, you'll need to refresh VSCode (with the Developer Tools open hit CTRL + R or CMD + R on a Mac).
 
 To develop slightly faster, we tried running the web panel in a browser. This is a bit difficult as most functions require VSCode API, but it's a good idea to work on UX elements in the browser using mocked data. An experimental `debug.ts` is available for that purpose. The idea is that we should be able to show the panel in any state, upon refresh. The debug mock data is being loaded in the `main.ts` when a browser is detected.

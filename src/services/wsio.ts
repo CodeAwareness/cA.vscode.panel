@@ -25,8 +25,8 @@ const CAWWS = {
     const id = shortid()
     return new Promise(
       (resolve, reject) => {
+        (data as any).id = shortid()
         logger.info(`WSS: will emit action: ${action}`)
-        data.id = shortid()
         const command = 'api'
         const key = action
         requests.push({ id, resolve, reject })

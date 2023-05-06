@@ -42,11 +42,19 @@
   }
 
   :global(.dark) {
-    color: white;
+    color: $peer8-light;
 
       :global(textarea) {
         background-color: black;
         color: white;
+      }
+
+      :global(a) {
+        color: $marine;
+
+          &:hover {
+            color: white;
+          }
       }
   }
 

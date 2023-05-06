@@ -2,6 +2,7 @@ const PORT_DEV = 8885
 const PORT_WSS = 48408
 
 /* eslint-disable-next-line */
+/* @ts-ignore */
 const LOCAL = !PRODUCTION
 
 export default {

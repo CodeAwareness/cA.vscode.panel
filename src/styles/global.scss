@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import "./variables.scss";
+
 :root {
   --toastContainerTop: auto;
   --toastContainerRight: auto;
@@ -8,6 +11,10 @@
 :global(.custom) {
   --toastBackground: #4299E1;
   --toastBarBackground: #2B6CB0;
+}
+
+:global(a) {
+  color: $marine;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
