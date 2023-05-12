@@ -11,7 +11,7 @@ async function setup(lang = 'en'): Promise<unknown> {
     initialLocale: lang,
   })
   logger.log('INIT i18n', lang)
-  const dictPromise = ky.get(`${config.EXT_SERVER}/assets/i18n/${lang}.json?t=${new Date().toISOString()}`).json()
+  const dictPromise = ky.get(`${config.EXT_SERVER}/i18n/${lang}.json?t=${new Date().toISOString()}`).json()
     .then(response => {
       i18nReady.set(true)
       return response

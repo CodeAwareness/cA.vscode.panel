@@ -88,7 +88,7 @@
         class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
         >
     <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <div>
         <div>
           <input type="text" placeholder="{$t('email')}" bind:value={email} />
@@ -141,7 +141,7 @@
 
   <form on:submit|preventDefault={resetPassword} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
     <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.resetPasswordWithEmail')}</h4>
       <div>
         <div>
@@ -168,7 +168,7 @@
 
   <form on:submit|preventDefault={signup} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
     <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/assets/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.signUpWithEmail')}</h4>
       <div>
         <input type="text" placeholder="{$t('email')}" bind:value={email} />

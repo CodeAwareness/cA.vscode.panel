@@ -83,7 +83,7 @@
       width: 1em;
       height: 1em;
       padding: 0 0.5em;
-      background: url(https://ext.codeawareness.com/images/icons/chevron-down-solid.svg) no-repeat;
+      background: url(https://vscode.codeawareness.com/icons/chevron-down-solid.svg) no-repeat;
       background-size: contain;
     }
 
@@ -91,7 +91,7 @@
       width: 1em;
       height: 1em;
       padding: 0 0.5em;
-      background: url(https://ext.codeawareness.com/images/icons/chevron-right-solid.svg) no-repeat;
+      background: url(https://vscode.codeawareness.com/icons/chevron-right-solid.svg) no-repeat;
       background-size: contain;
     }
 
