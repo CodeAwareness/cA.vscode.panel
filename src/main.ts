@@ -26,7 +26,11 @@ const EDITOR_LOCALE = IS_WEB ? params.lang : window.EDITOR_LOCALE || 'en'
 const DEBUG = IS_WEB && params.debug
 const THEME = IS_WEB && params.color
 
-if (+THEME === 2) document.body.style.backgroundColor = '#000'
+if (+THEME === 2) {
+  document.body.style.backgroundColor = '#000'
+  settings.set({ colorTheme: 2 })
+}
+
 i18n.setup(EDITOR_LOCALE || 'en')
 
 // For dev purposes

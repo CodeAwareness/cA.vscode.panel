@@ -139,7 +139,10 @@
 
 {:else if stage === 'forgotPassword'}
 
-  <form on:submit|preventDefault={resetPassword} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
+  <form on:submit|preventDefault={resetPassword}
+        in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
+        class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
+        >
     <div class="login">
       <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.resetPasswordWithEmail')}</h4>
@@ -166,7 +169,10 @@
 
 {:else if stage === 'signup'}
 
-  <form on:submit|preventDefault={signup} in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}">
+  <form on:submit|preventDefault={signup}
+        in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
+        class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
+        >
     <div class="login">
       <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <h4>{$t('auth.signUpWithEmail')}</h4>
@@ -206,6 +212,18 @@
     padding: 1em 2em;
     background: linear-gradient( 45deg, #b7dbe8, #ffebf0);
     filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.6));
+
+    &.light {
+      h4 {
+        color: black;
+      }
+
+      .login {
+        input:focus {
+          color: $marine;
+        }
+      }
+    }
 
     &.dark {
       background: transparent;
@@ -276,7 +294,7 @@
         background-color: transparent;
 
         &:focus {
-          border-color: #1abc9c;
+          border-color: $marine;
           color: $peer8-yellow;
           outline: 0;
         }
@@ -355,11 +373,6 @@
       color: black;
     }
 
-    .light {
-      h4 {
-        color: black;
-      }
-    }
   }
 
   .center {
