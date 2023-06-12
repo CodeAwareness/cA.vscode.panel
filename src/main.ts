@@ -90,17 +90,8 @@ function vsCodeErrorListener(event) {
 function getActiveContributors(project) {
   const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
   const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
-  console.log('CONTRIB', relativePath, project.changes)
-  const contributors = Object
-    .keys(project.changes[relativePath] || {})
-    .filter(k => k !== 'alines')
-    .map(uid => project.contributors[uid])
-
-  contributors?.forEach(contrib => {
-    contrib.changes = project.changes[relativePath][contrib._id]
-  })
-
-  return contributors
+  console.log('CONTRIB', relativePath, project.changes[relativePath]?.users)
+  return project.changes[relativePath]?.users || []
 }
 
 let requests: TWSRequest[]
