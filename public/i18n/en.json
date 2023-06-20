@@ -51,7 +51,7 @@
   },
   "invites": {
     "header": "This file is being shared",
-    "title": "You can now send the following link(s) to your contributors:",
+    "title": "You can now send the following link(s) to your peers:",
     "delete": "Delete share",
     "deleteConfirm": "Are you sure you want to delete this share? Your peers will be disconnected from this share."
   },
@@ -85,8 +85,8 @@
     "open": "(click to open the browser)"
   },
   "users": {
-    "contributors": "Contributors",
-    "noContributors": "There are no contributors to this file",
+    "peers": "Peers",
+    "noPeers": "There are no peers to this file",
     "teamName": "team name"
   }
 }

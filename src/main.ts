@@ -1,7 +1,7 @@
 import logger from '@/services/logger'
 import { vscode, Req } from '@/store/vscode.store'
 import { settings, activeProject, mode } from '@/store/app.store'
-import { contributors, selectedContributor } from '@/store/contributors.store'
+import { peers, selectedPeer } from '@/store/peers.store'
 import { tokens, user } from '@/store/user.store'
 
 import CAWWS, { type TWSRequest } from '@/services/wsio'
@@ -57,7 +57,7 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
 
 /****************************************************************
  * Initial settings:
- * - don't display the contributors UX, just a welcome page (empty)
+ * - don't display the peers UX, just a welcome page (empty)
  * - setup the activeProject
  * - redirect error handler to VSCode
  ****************************************************************/
@@ -82,12 +82,12 @@ function vsCodeErrorListener(event) {
   return false
 }
 /************************************************************************************
- * get contributors for the current file
+ * get peers for the current file
  *
  * Retrieve all users who have touched the file since the common SHA.
  * The file in question is the activePath, showing in the focussed editor.
  ************************************************************************************/
-function getActiveContributors(project) {
+function getActivePeers(project) {
   const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
   const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
   console.log('CONTRIB', relativePath, project.changes[relativePath]?.users)
@@ -121,20 +121,20 @@ function cawEvent(event) {
       settings.set({ colorTheme: parseInt(data.colorTheme) }) // TODO: better settings control, editor agnostic
       break
 
-    case 'setContributors':
-      logger.info('setContributors')
-      contributors.set(data.contributors)
+    case 'setPeers':
+      logger.info('setPeers')
+      peers.set(data.peers)
       break
 
-    case 'selectedContributor':
-      logger.info('selectedContributor')
-      selectedContributor.set(data.selectedContributor)
+    case 'selectPeer':
+      logger.info('selectPeer', data)
+      selectedPeer.set(data.peer)
       break
 
     case 'setProject':
       logger.info('setProject')
       activeProject.set(data)
-      contributors.set(getActiveContributors(data))
+      peers.set(getActivePeers(data))
       break
 
     case 'setBranches':
@@ -153,8 +153,9 @@ function cawEvent(event) {
       tokens.set(data.tokens)
       user.set(data.user)
       activeProject.set(data.activeProject)
-      contributors.set(getActiveContributors(data.activeProject))
+      peers.set(getActivePeers(data.activeProject))
       settings.set({ colorTheme: parseInt(data.colorTheme) })
+      break
 
     default:
       apiCallResponse()

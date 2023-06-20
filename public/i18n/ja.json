@@ -84,8 +84,8 @@
     "open": "（ブラウザーを開く）"
   },
   "users": {
-    "contributors": "寄稿者",
-    "noContributors": "このファイルには寄稿者はいません。",
+    "peers": "寄稿者",
+    "noPeers": "このファイルには寄稿者はいません。",
     "teamName": "チーム名"
   }
 }

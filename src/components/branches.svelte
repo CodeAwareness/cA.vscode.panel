@@ -1,7 +1,7 @@
 <script lang="ts">
   import { t } from '@/services/i18n'
   import { activeProject, settings } from '@/store/app.store'
-  import { selectedBranch, selectedContributor } from '@/store/contributors.store'
+  import { selectedBranch, selectedPeer } from '@/store/peers.store'
   import { vscode } from '@/store/vscode.store'
   import { fade } from 'svelte/transition'
 
@@ -26,7 +26,7 @@
 
   function selectBranch(branch: string) {
     if (!branch) return
-    selectedContributor.set(undefined)
+    selectedPeer.set(undefined)
     selectedBranch.set(!selBranch[branch] && branch)
     const key = selBranch[branch] ? 'branch:select' : 'branch:unselect'
     const command = 'event'

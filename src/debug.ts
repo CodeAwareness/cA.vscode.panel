@@ -156,7 +156,7 @@ export default {
         "src/extension.js": {},
         "tags": {}
       },
-      "contributors": {
+      "peers": {
         "646d4bcb4177c25ce07eba16": {
           "_id": "646d4bcb4177c25ce07eba16",
           "email": "hana@codeawareness.com",

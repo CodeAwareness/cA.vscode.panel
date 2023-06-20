@@ -8,7 +8,7 @@
   import { refreshUsers } from '@/services/users'
 
   import { activeProject, settings } from '@/store/app.store'
-  import { contributors, selectedBranch, selectedContributor } from '@/store/contributors.store'
+  import { peers, selectedBranch, selectedPeer } from '@/store/peers.store'
   import { activeProfile } from '@/store/user.store'
   import { vscode } from '@/store/vscode.store'
 
@@ -24,9 +24,18 @@
     console.log('USER CAME ONLINE', user)
   }
 
-  selectedContributor.subscribe((ct: any) => {
+  type TPeerBlock = {
+    _id: string
+    changes: {
+      s3key: string
+      sha: string
+    }
+  }
+
+  selectedPeer.subscribe((peer: TPeerBlock) => {
     selUsers = {}
-    if (ct) selUsers[ct._id] = 1
+    console.log('SELECTED PEER', peer)
+    if (peer) selUsers[peer._id] = 1
   })
 
   function showProfile(ct) {
@@ -44,7 +53,7 @@
   }
 
   // TODO: unsubscribe ( needed ? )
-  contributors.subscribe(value => {
+  peers.subscribe(value => {
     if (!value) return (participants = [])
     selUsers = {}
     /* eslint-disable-next-line array-callback-return */
@@ -54,16 +63,16 @@
     })
   })
 
-  function selectContributor(ct) {
+  function selectPeer(ct) {
     if (!ct) return
     if (selUsers[ct._id]) {
       selUsers[ct._id] = 0
       vscode.API.postMessage({ command: 'event', key: 'contrib:unselect', data: ct })
-      // localService.unselectContributor(ct)
+      // localService.unselectPeer(ct)
       return
     }
     selectedBranch.set(undefined)
-    selectedContributor.set(ct)
+    selectedPeer.set(ct)
     Object.keys(selUsers).map(id => (selUsers[id] = 0))
     selUsers[ct._id] = 1
     vscode.API.postMessage({ command: 'event', key: 'contrib:select', data: ct })
@@ -77,7 +86,7 @@
 <div class="{ [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">
   <h2 class="drop-section">
     <div on:click={toggle} on:keyup="{toggle}" tabindex="0" role="button">
-      {$t('users.contributors')} ({participants.length})
+      {$t('users.peers')} ({participants.length})
       <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
     </div>
   </h2>
@@ -85,14 +94,14 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar || 'https://vscode.codeawareness.com/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectContributor(ct)}" on:keyup="{selectContributor(ct)}" />
+          <img src="{ct.avatar || 'https://vscode.codeawareness.com/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectPeer(ct)}" on:keyup="{selectPeer(ct)}" />
           <div on:click="{showProfile(ct)}" on:keyup="{showProfile(ct)}" tabindex="0" role="button">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>
         </li>
       {/each}
       {#if !participants.length }
-        <li><i>{$t('users.noContributors')}</i></li>
+        <li><i>{$t('users.noPeers')}</i></li>
       {/if}
     </ul>
   {/if}
