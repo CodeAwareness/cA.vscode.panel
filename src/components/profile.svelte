@@ -24,7 +24,7 @@
 </script>
 
 <div class="{ [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">
-  <div class="back" on:click="{goBack}">Back</div>
+  <div class="back" on:click="{goBack}" on:keypress="{goBack}">Back</div>
   <div class="user-card">
     <div class="summary">
       <ul>
@@ -32,7 +32,7 @@
         <li>Overall stars: 213</li>
         <li>Stars received this year: 74</li>
       </ul>
-      <div on:click="{sendStars}">
+      <div on:click="{sendStars}" on:keypress="{sendStars}">
         <i class="fas fa-star gold"></i>
         <a href>Kudos {userAlias}!</a>
       </div>

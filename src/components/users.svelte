@@ -94,7 +94,7 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar || 'https://vscode.codeawareness.com/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectPeer(ct)}" on:keyup="{selectPeer(ct)}" />
+          <img src="{ct.avatar || 'https://vscode.codeawareness.com/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectPeer(ct)}" on:keyup="{selectPeer(ct)}" alt="select peer" />
           <div on:click="{showProfile(ct)}" on:keyup="{showProfile(ct)}" tabindex="0" role="button">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>

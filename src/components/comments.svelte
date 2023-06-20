@@ -109,7 +109,7 @@
 <svelte:window on:keydown="{keyDown}" />
 
 <div class="{ [1, 3, undefined].includes(_colorTheme) ? 'light' : 'dark' }">
-  <h2 class="drop-section" on:click={toggle}>{$t('comments.comments')} ({ commentCount })
+  <h2 class="drop-section" on:click={toggle} on:keypress={toggle}>{$t('comments.comments')} ({ commentCount })
     <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
   </h2>
 

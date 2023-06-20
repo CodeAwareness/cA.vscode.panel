@@ -49,18 +49,18 @@
 
 <div class="{ [1, 3, undefined].includes(_colorTheme) ? 'light' : 'dark' }">
   <h2 class="drop-section">
-    <div on:click={toggle} on:keyup="{toggle}" tabindex="0" role="button">
+    <div on:click={toggle} on:keyup="{toggle}">
       {$t('branches.branches')} ({branches.length})
       <span class="{ open ? 'chevron-down' : 'chevron-right' }"></span>
     </div>
-    <div on:click={refresh} on:keyup="{refresh}" tabindex="0" role="button">
+    <div on:click={refresh} on:keyup="{refresh}">
       <i class="fas fa-sync-alt" style="{rotationTransform}"></i>
     </div>
   </h2>
   {#if open}
     <ul in:fade="{{ delay: 100, duration: 90 }}" out:fade="{{ duration: 90 }}">
       {#each branches as branch}
-        <li on:click="{selectBranch(branch)}" class:active={selBranch[branch]} on:keyup="{selectBranch(branch)}" tabindex="0" role="button">
+        <li class:active={selBranch[branch]} on:click="{selectBranch(branch)}" on:keyup="{selectBranch(branch)}">
           <i class="fas fa-code-branch"></i>
           <span>{branch}</span>
         </li>
