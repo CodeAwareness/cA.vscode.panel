@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type WSIO from '@/wsio'
-
   import config from '@/config'
   import { fade } from 'svelte/transition'
 
@@ -54,12 +52,15 @@
 
   // TODO: unsubscribe ( needed ? )
   peers.subscribe(value => {
-    if (!value) return (participants = [])
+    if (!value) {
+      participants = []
+      return
+    }
     selUsers = {}
     /* eslint-disable-next-line array-callback-return */
-    participants = value.map(contrib => {
-      selUsers[contrib._id] = 0
-      return contrib
+    participants = value.map(peer => {
+      selUsers[peer._id] = 0
+      return peer
     })
   })
 
@@ -67,7 +68,7 @@
     if (!ct) return
     if (selUsers[ct._id]) {
       selUsers[ct._id] = 0
-      vscode.API.postMessage({ command: 'event', key: 'contrib:unselect', data: ct })
+      vscode.API.postMessage({ command: 'event', key: 'peer:unselect', data: ct })
       // localService.unselectPeer(ct)
       return
     }
@@ -75,7 +76,7 @@
     selectedPeer.set(ct)
     Object.keys(selUsers).map(id => (selUsers[id] = 0))
     selUsers[ct._id] = 1
-    vscode.API.postMessage({ command: 'event', key: 'contrib:select', data: ct })
+    vscode.API.postMessage({ command: 'event', key: 'peer:select', data: ct })
   }
 
   // Toggle
