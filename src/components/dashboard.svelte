@@ -1,7 +1,6 @@
 <script lang="ts">
   import { mode } from '@/store/app.store'
   import { activeProfile } from '@/store/user.store'
-  import Comments from './comments.svelte'
   import Users from './users.svelte'
   import Branches from './branches.svelte'
   import Profile from './profile.svelte'
@@ -22,9 +21,9 @@
     <Users />
     <Branches />
   </div>
-  <div class="container">
+  <!-- div class="container">
     <Comments />
-  </div>
+  </div -->
 {:else if activeMode === 'profile'}
   <div class="container">
     <Profile />
