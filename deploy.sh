@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf dist
 yarn build
 cd dist
 tar czvf /Users/markvasile/Code/CodeAwareness/vscode.panel.tgz .
