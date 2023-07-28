@@ -88,8 +88,8 @@ function vsCodeErrorListener(event) {
  * The file in question is the activePath, showing in the focussed editor.
  ************************************************************************************/
 function getActivePeers(project) {
-  const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
-  const relativePath = project.activePath.substr(project.root.length + extraSlash).replace(/\\/g, '/')
+  // const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
+  const relativePath = project.activePath.replace(/\\/g, '/')
   console.log('CONTRIB', relativePath, project.changes[relativePath]?.users)
   return project.changes[relativePath]?.users || []
 }
