@@ -89,9 +89,7 @@ function vsCodeErrorListener(event) {
  ************************************************************************************/
 function getActivePeers(project) {
   // const extraSlash = ['/', '\\'].includes(project.root[project.root.length - 1]) ? 0 : 1
-  const relativePath = project.activePath.replace(/\\/g, '/')
-  console.log('CONTRIB', relativePath, project.changes[relativePath]?.users)
-  return project.changes[relativePath]?.users || []
+  return project.users || []
 }
 
 let requests: TWSRequest[]

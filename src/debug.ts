@@ -14,167 +14,68 @@ export default {
     ],
     activeProject: {
       "name": "peer8.vscode",
-      "origin": "peer8/peer8.vscode",
+      "origin": "github.com:peer8/peer8.vscode",
       "root": "/Users/markvasile/Code/CodeAwareness/peer8.vscode",
-      "changes": {
-        "README.md": {},
-        "src/config.js": {
-          "users": [
-            {
-              "_id": "646d4bcb4177c25ce07eba16",
-              "email": "hana@codeawareness.com",
-              "createdAt": "2023-05-23T23:27:07.897Z",
-              "updatedAt": "2023-05-24T01:00:57.861Z",
-              "lang": "en"
-            },
-            {
-              "_id": "646d4bef4177c25ce07eba1d",
-              "email": "mark@codeawareness.com",
-              "createdAt": "2023-05-23T23:27:43.514Z",
-              "updatedAt": "2023-06-08T07:21:35.720Z",
-              "lang": "en"
-            }
-          ],
-          "file": {
-            "_id": "646d4bcdb1b2e58afe4542dd",
-            "file": "src/config.js",
-            "repo": "646d4bcc4177c25ce07eba1b",
-            "updatedAt": "2023-05-28T06:56:04.750Z",
-            "changes": {
-              "646d4bcb4177c25ce07eba16": {
-                "sha": "474b04f18ed6928f4b799698a64b5f2cc43471ce",
-                "lines": [
-                  0,
-                  2,
-                  10,
-                  14,
-                  18,
-                  35
-                ],
-                "s3key": "diffs/646d4bcb4177c25ce07eba16/peer8/peer8.vscode/src/config.js",
-                "diffs": [
-                  {
-                    "range": {
-                      "line": 0,
-                      "len": 0,
-                      "content": [
-                        "// Something"
-                      ]
-                    },
-                    "replaceLen": 1
-                  },
-                  {
-                    "range": {
-                      "line": 2,
-                      "len": 0,
-                      "content": [
-                        "// We're using nginx on port 8886 to coordinate between API, Local Service, editor panel, etc."
-                      ]
-                    },
-                    "replaceLen": 1
-                  },
-                  {
-                    "range": {
-                      "line": 10,
-                      "len": 0,
-                      "content": [
-                        ""
-                      ]
-                    },
-                    "replaceLen": 1
-                  },
-                  {
-                    "range": {
-                      "line": 14,
-                      "len": 1,
-                      "content": [
-                        "// TODO: The maximum number of commit SHAs to compare from HEAD down",
-                        "const MAX_NR_OF_SHA_TO_COMPARE = 5 // should probably be something like 200 commits"
-                      ]
-                    },
-                    "replaceLen": 2
-                  },
-                  {
-                    "range": {
-                      "line": 18,
-                      "len": 1,
-                      "content": [
-                        "const LOG_LEVEL = process.env.LOG_LEVEL || 'debug' // one of ['verbose', 'debug', 'error']"
-                      ]
-                    },
-                    "replaceLen": 1
-                  },
-                  {
-                    "range": {
-                      "line": 35,
-                      "len": 1,
-                      "content": []
-                    },
-                    "replaceLen": 0
-                  }
-                ]
-              },
-              "646d4bef4177c25ce07eba1d": {
-                "sha": "474b04f18ed6928f4b799698a64b5f2cc43471ce",
-                "lines": [
-                  18,
-                  35
-                ],
-                "s3key": "diffs/646d4bef4177c25ce07eba1d/peer8/peer8.vscode/src/config.js",
-                "diffs": [
-                  {
-                    "range": {
-                      "line": 18,
-                      "len": 1,
-                      "content": [
-                        "const LOG_LEVEL = process.env.LOG_LEVEL || 'debug' // one of ['verbose', 'debug', 'error']"
-                      ]
-                    },
-                    "replaceLen": 1
-                  },
-                  {
-                    "range": {
-                      "line": 35,
-                      "len": 1,
-                      "content": []
-                    },
-                    "replaceLen": 0
-                  }
-                ]
-              }
-            }
+      "activePath": "src/config.js",
+      "cSHA": "474b04f18ed6928f4b799698a64b5f2cc43471ce",
+      "branch": "feature/teams",
+      "head": "474b04f18ed6928f4b799698a64b5f2cc43471ce",
+      "file": {
+        "_id": "64ca0c3f4210eece0a555cae",
+        "file": "src/config.js",
+        "repo": "64ca0c3dd086cc7c3754b3b0",
+        "updatedAt": "2023-08-18T21:49:33.527Z",
+        "changes": {
+          "64c37649d45282f987887ac5": {
+            "sha": "aa97e87e832ef6c4f5b238157ef23e222959cda5",
+            "lines": [
+              [ 8, -2, 3 ],
+              [ 13, -2, 0 ],
+              [ 19, -1, 1 ]
+            ],
+            "s3key": "diffs/64c37649d45282f987887ac5/github.com:peer8/peer8.vscode/src/config.js"
           },
-          "alines": [
-            0,
-            2,
-            10,
-            14,
-            18,
-            35
-          ]
-        },
-        "src/extension.js": {},
-        "tags": {}
-      },
-      "peers": {
-        "646d4bcb4177c25ce07eba16": {
-          "_id": "646d4bcb4177c25ce07eba16",
-          "email": "hana@codeawareness.com",
-          "createdAt": "2023-05-23T23:27:07.897Z",
-          "updatedAt": "2023-05-24T01:00:57.861Z",
-          "lang": "en"
+          "64c3761cd45282f987887abe": {
+            "sha": "aa97e87e832ef6c4f5b238157ef23e222959cda5",
+            "lines": [
+              [ 3, -1, 1 ],
+              [ 8, -2, 4 ],
+              [ 17, 0, 3 ],
+              [ 25, -1, 1 ]
+            ],
+            "s3key": "diffs/64c3761cd45282f987887abe/github.com:peer8/peer8.vscode/src/config.js"
+          }
         }
       },
-      "activePath": "/Users/markvasile/Code/CodeAwareness/peer8.vscode/src/config.js",
-      "branch": "feature/teams",
       "branches": [
+        "diffs-test",
         "feature/teams",
         "light",
         "main",
         "windows"
       ],
-      "head": "474b04f18ed6928f4b799698a64b5f2cc43471ce",
-      "cSHA": "474b04f18ed6928f4b799698a64b5f2cc43471ce"
+      "users": [
+        {
+          "_id": "64c3761cd45282f987887abe",
+          "email": "uno@codeawareness.com",
+          "createdAt": "2023-07-28T08:02:36.973Z",
+          "updatedAt": "2023-08-18T21:13:32.846Z",
+          "lang": "en"
+        },
+        {
+          "_id": "64c37649d45282f987887ac5",
+          "email": "mark@codeawareness.com",
+          "createdAt": "2023-07-28T08:03:21.880Z",
+          "updatedAt": "2023-08-15T04:57:36.859Z",
+          "lang": "en"
+        }
+      ],
+      "tree": [
+        "src/config.js",
+        "tags",
+        "README.md"
+      ],
+      "hl": [ 8, 9, 10, 11, 15, 24 ],
     },
   },
 }
