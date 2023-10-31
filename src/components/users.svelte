@@ -1,14 +1,14 @@
 <script lang="ts">
-  import config from '@/config'
+  import { vscode } from '@/store/vscode.store'
   import { fade } from 'svelte/transition'
 
+  import config from '@/config'
   import { t } from '@/services/i18n'
   import { refreshUsers } from '@/services/users'
 
   import { activeProject, settings } from '@/store/app.store'
   import { peers, selectedBranch, selectedPeer } from '@/store/peers.store'
   import { activeProfile } from '@/store/user.store'
-  import { vscode } from '@/store/vscode.store'
 
   let participants = []
   let selUsers = {}

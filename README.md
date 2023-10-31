@@ -12,7 +12,7 @@ You don't need to install this to run your VSCode extension. The VSCode web pane
 
 ### Development
 
-Prerequisite: `npx office-addin-dev-certs install` to get https on localhost. After installation, restart nginx.
+Prerequisite: `npx office-addin-dev-certs install` to get https on localhost. After installation, restart nginx. The certificate is only valid for one month by default. Also, on latest MacOS / Chrome it doesn't seem to be working at all.
 
 To start developing and customizing this web panel, just run `yarn dev` and have fun. When you change the code, you'll need to refresh VSCode (with the Developer Tools open hit CTRL + R or CMD + R on a Mac).
 

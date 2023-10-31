@@ -88,5 +88,10 @@
     "peers": "Peers",
     "noPeers": "There are no contributors to this file",
     "teamName": "team name"
+  },
+  "context": {
+    "items": "Context Items",
+    "typeNewContext": "context item...",
+    "noItems": "No context items on this file"
   }
 }

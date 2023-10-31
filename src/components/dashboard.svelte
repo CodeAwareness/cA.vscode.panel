@@ -4,6 +4,7 @@
   import Users from './users.svelte'
   import Branches from './branches.svelte'
   import Profile from './profile.svelte'
+  import CAContext from './context.svelte'
 
   import Search from './search.svelte'
 
@@ -20,6 +21,9 @@
   <div class="container">
     <Users />
     <Branches />
+  </div>
+  <div>
+    <CAContext />
   </div>
   <!-- div class="container">
     <Comments />
