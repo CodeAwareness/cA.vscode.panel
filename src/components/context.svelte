@@ -1,36 +1,69 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition'
+ import { fade } from 'svelte/transition'
 
-  import { settings } from '@/store/app.store'
-  import { vscode } from '@/store/vscode.store'
-  import { t } from '@/services/i18n'
+ import { vscode } from '@/store/vscode.store'
+ import { activeProject, settings } from '@/store/app.store'
+ import { fileContext, projectContext } from '@/store/context.store'
+ import { t } from '@/services/i18n'
 
-  let colorTheme = 1 // Color theme can be 1 or 2 (from VSCode 1 = light, 2 = dark)
-  settings.subscribe(val => (colorTheme = val.colorTheme))
+ let colorTheme = 1 // Color theme can be 1 or 2 (from VSCode 1 = light, 2 = dark)
+ let project
+ let fContext, pContext
 
-  export let contextItems = []
-  let newContext: string
+ export let contextItems = []
+ let newContext: string
 
-  function addContext() {
-    const citem = newContext.trim()
-    contextItems.push(citem)
-    contextItems = contextItems // svelte needs this to detect changes in the array
-    vscode.API.postMessage({ command: 'event', key: 'context:add', data: citem })
-    newContext = ''
-  }
+ settings.subscribe(val => (colorTheme = val.colorTheme))
+ activeProject.subscribe(val => { project = val })
+ fileContext.subscribe(val => {
+   fContext = val
+   if (val?.lines) contextItems = [ ...new Set(val.lines.flatMap(l => l.context)) ].sort()
+ })
+ projectContext.subscribe(val => { pContext = val })
 
-  function keyUp(ev) {
-    // add Context upon pressing the Enter key
-    if (ev.key === 'Enter') addContext()
-  }
+ export type TLineContext = {
+   line: number
+   context: Array<string>
+ }
 
-  function showContext(contextItem) {
-    console.log('showing context', contextItem)
-  }
+ export type TProjectContext = {
+   file: string
+   context: Array<string>
+ }
 
-  // Toggle
-  let open = true
-  const toggle = () => (open = !open)
+ export type TContextResponse = {
+   fileContext: {
+     _id: string
+     user: string
+     repo: string
+     file: string
+     lines: Array<TLineContext>
+     updatedAt: string
+     createdAt?: string
+   }
+   projectContext: Array<TProjectContext>
+ }
+
+ function addContext() {
+   const citem = newContext.trim()
+   contextItems.push(citem)
+   contextItems = contextItems // svelte needs this to detect changes in the array
+   vscode.API.postMessage({ command: 'event', key: 'context:add', data: citem })
+   newContext = ''
+ }
+
+ function keyUp(ev) {
+   // add Context upon pressing the Enter key
+   if (ev.key === 'Enter') addContext()
+ }
+
+ function showContext(contextItem) {
+   console.log('showing context', contextItem)
+ }
+
+ // Toggle
+ let open = true
+ const toggle = () => (open = !open)
 </script>
 
 <div class="{ [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }">

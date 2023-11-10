@@ -1,6 +1,6 @@
 /* eslint-disable quote-props,object-curly-spacing,quotes,comma-spacing,comma-dangle,key-spacing,object-property-newline */
 export default {
-  command: 'initWithData',
+  command: 'setup:init-data',
   data: {
     "user":{"alias":"","_id":"608d6e5e97587524d0f78093","email":"hana@peer8.com","avatar":"https://peer8.com/peer8-user.png","createdAt":"2021-05-01T15:06:06.961Z","updatedAt":"2021-05-22T04:43:50.679Z","lang":"en"},"tokens":{"access":{"token":"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDhkNmU1ZTk3NTg3NTI0ZDBmNzgwOTMiLCJpYXQiOjE2MjE3NTY1NDMsImV4cCI6MTYyMTc1ODM0MywiYXVkIjoiYXBpLnBlZXI4LmNvbSIsImlzcyI6InNlY3VyaXR5LnBlZXI4LmNvbSJ9.kHxmEMlX9WnPIr41I4naG0QhJ6FiRr4rVvzpO1WP0tkRk1DNgf-z6hdsxC4vKX_c","expires":"2021-05-23T08:25:43.233Z"},"refresh":{"token":"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDhkNmU1ZTk3NTg3NTI0ZDBmNzgwOTMiLCJpYXQiOjE2MjE3NTY1NDMsImV4cCI6MTYyNDM0ODU0MywiYXVkIjoiYXBpLnBlZXI4LmNvbSIsImlzcyI6InNlY3VyaXR5LnBlZXI4LmNvbSJ9.xu6qnZPuaaQTFbeBeKbpo8pWSHsmTVlBDf2oeteuiUIv8_KA4Ybjn_wTihOjtpZV","expires":"2021-06-22T07:55:43.233Z"}},
     colorTheme: 2,
@@ -77,5 +77,22 @@ export default {
       ],
       "hl": [ 8, 9, 10, 11, 15, 24 ],
     },
+    fileContext: {
+      _id: "64c37649dt5282f9g7887ac5",
+      user: "84c3h649dt5382f927887ac5",
+      repo: "91c37649d352a2f9g7887ac5",
+      file: "README.md",
+      lines: [
+        { line: 2, context: [ 'security', 'communication' ]},
+        { line: 8, context: [ 'performance' ]},
+        { line: 12, context: [ 'performance', 'UX-tips' ]},
+      ],
+      updatedAt: '2023-07-28T08:03:21.880Z',
+      createdAt: '2023-07-28T08:03:21.880Z',
+    },
+    projectContext: [
+      { file: 'README.md', context: ['communication', 'performance', 'security', 'UX-tips']},
+      { file: 'src/controllers/user.ctrl.ts', context: ['security', 'UX-flaky']},
+    ],
   },
 }

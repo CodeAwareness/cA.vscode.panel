@@ -2,6 +2,7 @@ import logger from '@/services/logger'
 import { vscode, Req } from '@/store/vscode.store'
 import { settings, activeProject, mode } from '@/store/app.store'
 import { peers, selectedPeer } from '@/store/peers.store'
+import { fileContext, projectContext } from '@/store/context.store'
 import { tokens, user } from '@/store/user.store'
 
 import CAWWS, { type TWSRequest } from '@/services/wsio'
@@ -21,7 +22,7 @@ declare global {
 const IS_WEB = /^http/.test(location.href) && location.search
 const query = location.search.substr(1).split('&').map(p => p.split('='))
 const params: Record<string, string> = {}
-query.map(p => params[p[0]] = p[1])
+query.map(p => (params[p[0]] = p[1]))
 const EDITOR_LOCALE = IS_WEB ? params.lang : window.EDITOR_LOCALE || 'en'
 const DEBUG = IS_WEB && params.debug
 const THEME = IS_WEB && params.color
@@ -34,12 +35,12 @@ if (+THEME === 2) {
 i18n.setup(EDITOR_LOCALE || 'en')
 
 // For dev purposes
-let ignore_second_render
+let ignoreSecondRender
 const win = window as unknown as any
 if (!win.CAW_DEBUG) {
   win.CAW_DEBUG = DEBUG
 } else {
-  ignore_second_render = true
+  ignoreSecondRender = true
 }
 
 /****************************************************************
@@ -51,7 +52,7 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
   : {
     postMessage: function postMessage(...args) {
       logger.log('POST MESSAGE TO VSCODE', args)
-      if (DEBUG && args[0] && args[0].key === 'webview:loaded') cawEvent({ command: 'initWithData', data: initData })
+      if (DEBUG && args[0] && args[0].key === 'webview:loaded') cawEvent({ command: 'setup:init-data', data: initData })
     },
   }
 
@@ -62,9 +63,6 @@ vscode.API = typeof window.acquireVsCodeApi !== 'undefined'
  * - redirect error handler to VSCode
  ****************************************************************/
 mode.set('repo')
-
-let ap
-activeProject.subscribe(val => (ap = val))
 
 window.addEventListener('error', vsCodeErrorListener)
 window.addEventListener('message', cawEvent)
@@ -104,55 +102,45 @@ function cawEvent(event) {
   const { id, command, data } = event.data
   console.log('Received caw event', command, data)
   switch (command) {
-    case 'authInfo':
+    case 'auth:info':
       tokens.set(data.tokens)
       user.set(data.user)
       break
 
-    case 'wssGuid':
+    case 'context:update':
+      fileContext.set(data.fileContext)
+      projectContext.set(data.projectContext)
+      break
+
+    case 'setup:wss-guid':
       logger.info('WEBVIEW received WSS GUID', data)
       CAWWS.init(data)
       break
 
-    case 'setColorTheme':
+    case 'setup:color-theme':
       logger.info('setColorTheme', data.colorTheme)
       settings.set({ colorTheme: parseInt(data.colorTheme) }) // TODO: better settings control, editor agnostic
       break
 
-    case 'setPeers':
-      logger.info('setPeers')
-      peers.set(data.peers)
-      break
-
-    case 'selectPeer':
+    case 'peer:select':
       logger.info('selectPeer', data)
       selectedPeer.set(data.peer)
       break
 
-    case 'setProject':
+    case 'repo:project':
       logger.info('setProject')
       activeProject.set(data)
       peers.set(getActivePeers(data))
       break
 
-    case 'setBranches':
-      logger.info('setBranches', data)
-      ap.repo.branch = data.branch
-      ap.repo.commit = data.commit
-      ap.repo.branches = data.branches
-      activeProject.set(ap)
-      break
-
-    case 'setMode':
-      mode.set(data.mode)
-      break
-
-    case 'initWithData':
+    case 'setup:init-data':
       tokens.set(data.tokens)
       user.set(data.user)
       activeProject.set(data.activeProject)
       peers.set(getActivePeers(data.activeProject))
       settings.set({ colorTheme: parseInt(data.colorTheme) })
+      fileContext.set(data.fileContext)
+      projectContext.set(data.projectContext)
       break
 
     default:
@@ -178,7 +166,7 @@ vscode.API.postMessage({
   key: 'webview:loaded',
 })
 
-const app = ignore_second_render ? {} : new App({
+const app = ignoreSecondRender ? {} : new App({
   target: document.body,
   props: {},
 })
