@@ -15,11 +15,6 @@
 
   i18nReady.subscribe((val) => setTimeout(() => (showUX = val), 100))
 
-  // TODO: for paid plans, we could sync as soon as any peer file is changed / saved
-  function fetchDiffs({ repoOrigin, uid }) {
-    console.log('UPDATE AVAILABLE', uid, repoOrigin)
-    // vscode.API.postMessage({ command: 'repo:fetchDiffs', repoOrigin })
-  }
 </script>
 
 <style lang="scss">

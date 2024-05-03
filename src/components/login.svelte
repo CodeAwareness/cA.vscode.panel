@@ -78,7 +78,7 @@
       })
   }
 
-  logger.log('API:', `${config.SERVER_URL}/logger/log`)
+  logger.log('API:', `${config.EXT_MEDIA}/logger/log`)
 
 </script>
 

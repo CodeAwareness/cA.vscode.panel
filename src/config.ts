@@ -1,14 +1,8 @@
-const PORT_DEV = 8885
-const PORT_WSS = 48408
-
-/* eslint-disable-next-line */
-/* @ts-ignore */
-const LOCAL = true
+const PORT_DEV = 3080
+const LOCAL = process.env.NODE_ENV === 'development'
 
 export default {
   PORT_DEV,
-  MAX_USER_NAME_LENGTH: 14,
-  EXT_SERVER: LOCAL ? `https://vstest.codeawareness.com` : 'https://vscode.codeawareness.com',
-  SERVER_URL: LOCAL ? `https://127.0.0.1:${PORT_DEV}/api/v1` : 'https://api.codeawareness.com/v1',
-  SERVER_WSS: `wss://127.0.0.1:${PORT_WSS}`,
+  MAX_USER_NAME_LENGTH: 24,
+  EXT_MEDIA: LOCAL ? `https://lc.codeawareness.com:${PORT_DEV}` : 'https://vscode.codeawareness.com',
 }

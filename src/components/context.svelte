@@ -1,6 +1,7 @@
 <script lang="ts">
  import { fade } from 'svelte/transition'
 
+ import config from '@/config'
  import { vscode } from '@/store/vscode.store'
  import { activeProject, settings } from '@/store/app.store'
  import { fileContext, projectContext } from '@/store/context.store'
@@ -81,7 +82,7 @@
 
       {#each contextItems as ci}
         <div on:mouseover={ showContext(ci) } on:focus="{ void(0) }" tabindex="0" role="button">
-          <img src="https://vscode.codeawareness.com/icons/link-solid.svg" />
+          <img src="https://{ config.EXT_MEDIA }/icons/link-solid.svg" />
           <span>{ ci }</span>
         </div>
       {/each}

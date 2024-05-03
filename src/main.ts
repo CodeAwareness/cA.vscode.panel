@@ -112,11 +112,6 @@ function cawEvent(event) {
       projectContext.set(data.projectContext)
       break
 
-    case 'setup:wss-guid':
-      logger.info('WEBVIEW received WSS GUID', data)
-      CAWWS.init(data)
-      break
-
     case 'setup:color-theme':
       logger.info('setColorTheme', data.colorTheme)
       settings.set({ colorTheme: parseInt(data.colorTheme) }) // TODO: better settings control, editor agnostic
