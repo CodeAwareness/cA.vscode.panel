@@ -57,15 +57,15 @@ exports.devServer = () => ({
   watch: true,
   plugins: [
     new WebpackPluginServe({
-      client: { address: 'localhost:3080', protocol: 'wss' },
+      client: { address: 'lc.codeawareness.com:8885', protocol: 'wss' },
       port: 3080,
       host: '127.0.0.1',
       static: path.resolve(process.cwd(), 'dist'),
       historyFallback: true,
-      publicPath: 'https://localhost:8885',
+      publicPath: 'https://lc.codeawareness.com:8885',
       ramdisk: true,
       middleware: (app, builtins) => {
-        app.use(builtins.proxy('/socket.io', { target: 'https://localhost:3080' }))
+        app.use(builtins.proxy('/socket.io', { target: 'https://lc.codeawareness.com:8885' }))
       },
       https: {
         key: fs.readFileSync('/Users/markvasile/.office-addin-dev-certs/localhost.key'),
@@ -154,7 +154,7 @@ exports.svelte = mode => {
   return {
     resolve: {
       alias: {
-        svelte: path.dirname(require.resolve('svelte/package.json')),
+        svelte: path.resolve('node_modules', 'svelte/src/runtime'),
         '@': path.resolve(__dirname, '../src'),
       },
       extensions: ['.mjs', '.js', '.svelte', '.ts'],

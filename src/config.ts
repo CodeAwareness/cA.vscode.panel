@@ -1,5 +1,5 @@
-const PORT_DEV = 3080
-const LOCAL = process.env.NODE_ENV === 'development'
+const PORT_DEV = 8885
+const LOCAL = false
 
 export default {
   PORT_DEV,

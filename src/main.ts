@@ -5,7 +5,6 @@ import { peers, selectedPeer } from '@/store/peers.store'
 import { fileContext, projectContext } from '@/store/context.store'
 import { tokens, user } from '@/store/user.store'
 
-import CAWWS, { type TWSRequest } from '@/services/wsio'
 import i18n from '@/services/i18n'
 
 import App from './App.svelte'
@@ -90,7 +89,7 @@ function getActivePeers(project) {
   return project.users || []
 }
 
-let requests: TWSRequest[]
+let requests
 Req.subscribe(val => {
   requests = val
 })

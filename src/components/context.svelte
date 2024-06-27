@@ -82,7 +82,7 @@
 
       {#each contextItems as ci}
         <div on:mouseover={ showContext(ci) } on:focus="{ void(0) }" tabindex="0" role="button">
-          <img src="https://{ config.EXT_MEDIA }/icons/link-solid.svg" />
+          <img src="https://{ config.EXT_MEDIA }/icons/link-solid.svg" alt="link to context item" />
           <span>{ ci }</span>
         </div>
       {/each}

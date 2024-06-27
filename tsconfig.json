@@ -15,8 +15,6 @@
 			"es2017", "WebWorker", "dom.iterable", "dom"
 		],
 
-    "importsNotUsedAsValues": "error",
-    "preserveValueImports": true,
     "isolatedModules": true,
 
 		"sourceMap": true,

@@ -51,38 +51,10 @@
       })
   }
 
-  function signup() {
-    isLoading = true
-    CAWWS.transmit('auth:signup', { email, password })
-      .then(auth)
-      .catch(err => {
-        logger.error('Cannot register new account.', err)
-        failure(`Registration failed. \r${apiError(err)}`)
-      })
-      .finally(() => {
-        isLoading = false
-      })
-  }
-
-  function resetPassword() {
-    isLoading = true
-    CAWWS.transmit('auth:sendPasswordReset', { email })
-      .then(() => {
-        success('Please check your email to reset your password.', 'success')
-      })
-      .catch(err => {
-        failure(`Could not send email. \r${apiError(err)}`)
-      })
-      .finally(() => {
-        isLoading = false
-      })
-  }
-
   logger.log('API:', `${config.EXT_MEDIA}/logger/log`)
 
 </script>
 
-{#if stage === 'login' }
   <form on:submit|preventDefault={auth}
         in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
         class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
@@ -99,7 +71,7 @@
         <div>
           <input type="password" placeholder="{$t('password')}" bind:value={password} />
           <i class="fas fa-key"></i>
-          <div class="right small"><a href="/reset-password" on:click|preventDefault="{() => stage = 'forgotPassword'}">{$t('auth.forgotPassword')}</a></div>
+          <div class="right small"><a href="https://codeawareness.com/login?s=reset">{$t('auth.forgotPassword')}</a></div>
 
           {#if isLoading }
             <input type="submit" disabled value="{$t('auth.loggingIn')}..." />
@@ -133,73 +105,9 @@
     </div>
 
     <div class="center small">
-      <p>{$t('auth.dontHaveAccount')} <a href on:click|preventDefault="{() => (stage = 'signup')}">{$t('auth.clickToSignup')}</a></p>
+      <p>{$t('auth.dontHaveAccount')} <a href="https://codeawareness.com/login?s=signup">{$t('auth.clickToSignup')}</a></p>
     </div>
   </form>
-
-{:else if stage === 'forgotPassword'}
-
-  <form on:submit|preventDefault={resetPassword}
-        in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
-        class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
-        >
-    <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
-      <h4>{$t('auth.resetPasswordWithEmail')}</h4>
-      <div>
-        <div>
-          <input type="text" placeholder="{$t('email')}" bind:value={email} />
-          <i class="fas fa-user"></i>
-        </div>
-      </div>
-
-      {#if isLoading }
-        <input type="submit" disabled value="{$t('auth.sendingEmail')}..." />
-      {:else}
-        <input type="submit" value="{$t('auth.sendEmail')}" />
-      {/if}
-
-    </div>
-
-    <div class="right small padding">
-      <hr />
-      <p><a href on:click|preventDefault="{() => (stage = 'login')}">{$t('auth.returnToLogin')}</a></p>
-    </div>
-  </form>
-
-{:else if stage === 'signup'}
-
-  <form on:submit|preventDefault={signup}
-        in:fade="{{ delay: 300, duration: 600 }}" out:fade="{{ duration: 200 }}"
-        class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
-        >
-    <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
-      <h4>{$t('auth.signUpWithEmail')}</h4>
-      <div>
-        <input type="text" placeholder="{$t('email')}" bind:value={email} />
-        <i class="fas fa-user"></i>
-      </div>
-      <div>
-        <input type="password" placeholder="{$t('password')}" bind:value={password} />
-        <i class="fas fa-key"></i>
-      </div>
-
-      {#if isLoading }
-        <input type="submit" disabled value="{$t('auth.registeringNow')}..." />
-      {:else}
-        <input type="submit" value="{$t('auth.register')}" />
-      {/if}
-
-    </div>
-
-    <div class="right small padding">
-      <hr />
-      <p><a href on:click|preventDefault="{() => (stage = 'login')}">{$t('auth.returnToLogin')}</a></p>
-    </div>
-  </form>
-
-{/if}
 
 <style lang="scss">
   @import '../styles/variables.scss';
