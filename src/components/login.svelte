@@ -22,7 +22,6 @@
   const vscodeAuth = data => {
     const key = 'auth:login',
     const command = 'event'
-    vscode.API.postMessage({ command, key, data })
   }
 
   const settingsSub = settings.subscribe(val => (colorTheme = val.colorTheme))
