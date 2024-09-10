@@ -19,11 +19,6 @@
   let email = ''
   let password = ''
 
-  const vscodeAuth = data => {
-    const key = 'auth:login',
-    const command = 'event'
-  }
-
   const settingsSub = settings.subscribe(val => (colorTheme = val.colorTheme))
 
   onDestroy(settingsSub)
@@ -36,10 +31,7 @@
   function auth() {
     isLoading = true
     CAWWS.transmit('auth:login', { strategy: 'local', email, password })
-      .then(data => {
-        storeAuthInfo(data)
-        vscodeAuth(data)
-      })
+      .then(storeAuthInfo)
       .catch(err => {
         console.log('AUTH ERR', err)
         logger.error(err.message)
