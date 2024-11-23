@@ -24,7 +24,7 @@
       width:1.4em;
       height: 1.4em;
       margin-right: 5px;
-      background:url(https://vscode.codeawareness.com/icons/search-solid.svg) no-repeat;
+      background:url(https://ext.codeawareness.com/vscode/icons/search-solid.svg) no-repeat;
       background-size:contain;
     }
   }

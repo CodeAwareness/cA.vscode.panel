@@ -74,7 +74,7 @@
 
   h2 {
     &::before{
-      background: url(https://vscode.codeawareness.com/icons/code-branch-solid.svg) no-repeat;
+      background: url(https://ext.codeawareness.com/vscode/icons/code-branch-solid.svg) no-repeat;
     }
   }
 

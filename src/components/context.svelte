@@ -100,7 +100,7 @@
 
   h2 {
     &::before {
-      background:url(https://vscode.codeawareness.com/icons/link-solid.svg) no-repeat;
+      background:url(https://ext.codeawareness.com/vscode/icons/link-solid.svg) no-repeat;
     }
   }
 

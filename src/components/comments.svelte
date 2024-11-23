@@ -165,7 +165,7 @@
 
   h2 {
       &::before{
-        background:url(https://vscode.codeawareness.com/icons/comment-alt-regular.svg) no-repeat;
+        background:url(https://ext.codeawareness.com/vscode/icons/comment-alt-regular.svg) no-repeat;
       }
   }
 
@@ -261,31 +261,31 @@
   }
 
   .clock {
-    background: url(https://vscode.codeawareness.com/icons/clock-regular.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/clock-regular.svg) no-repeat;
   }
 
   .share-square {
-    background: url(https://vscode.codeawareness.com/icons/share-square-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/share-square-solid.svg) no-repeat;
   }
 
   .reply {
-    background: url(https://vscode.codeawareness.com/icons/reply-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/reply-solid.svg) no-repeat;
   }
 
   .link {
-    background: url(https://vscode.codeawareness.com/icons/link-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/link-solid.svg) no-repeat;
   }
 
   .smile {
-    background: url(https://vscode.codeawareness.com/icons/smile-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/smile-solid.svg) no-repeat;
   }
 
   .pen {
-    background: url(https://vscode.codeawareness.com/icons/pen-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/pen-solid.svg) no-repeat;
   }
 
   .trash {
-    background: url(https://vscode.codeawareness.com/icons/trash-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/trash-solid.svg) no-repeat;
   }
 
 </style>

@@ -95,7 +95,7 @@
     <ul>
       {#each participants as ct (ct._id)}
         <li class:active={selUsers[ct._id]} in:fade="{{ delay: 100, duration: 190 }}">
-          <img src="{ct.avatar || 'https://vscode.codeawareness.com/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectPeer(ct)}" on:keyup="{selectPeer(ct)}" alt="select peer" />
+          <img src="{ct.avatar || 'https://ext.codeawareness.com/vscode/icons/user-solid.svg'}" :alt="{ct.email}" on:click="{selectPeer(ct)}" on:keyup="{selectPeer(ct)}" alt="select peer" />
           <div on:click="{showProfile(ct)}" on:keyup="{showProfile(ct)}" tabindex="0" role="button">
             <i class="id-card"></i><span>{shortEmail(ct)}</span>
           </div>
@@ -122,7 +122,7 @@
 
   h2 {
     &::before{
-      background:url(https://vscode.codeawareness.com/icons/users-solid.svg) no-repeat;
+      background:url(https://ext.codeawareness.com/vscode/icons/users-solid.svg) no-repeat;
     }
   }
   img {
@@ -178,7 +178,7 @@
     width: 1em;
     height: 1em;
     padding: 0 0.5em;
-    background: url(https://vscode.codeawareness.com/icons/id-card-solid.svg) no-repeat;
+    background: url(https://ext.codeawareness.com/vscode/icons/id-card-solid.svg) no-repeat;
     background-size: contain;
   }
 </style>

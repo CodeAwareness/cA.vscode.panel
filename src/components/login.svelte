@@ -51,7 +51,7 @@
         class="login { [1, 3, undefined].includes(colorTheme) ? 'light' : 'dark' }"
         >
     <div class="login">
-      <h2><img src="https://vscode.codeawareness.com/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
+      <h2><img src="https://ext.codeawareness.com/vscode/images/codeawareness-logo.svg" alt="Code Awareness logo" /> <div>{$t('auth.title')}</div></h2>
       <div>
         <div>
           <input type="text" placeholder="{$t('email')}" bind:value={email} />

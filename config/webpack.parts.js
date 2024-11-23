@@ -41,7 +41,7 @@ exports.htmlFromTemplate = (mode) => ({
   plugins: [
     new HtmlWebpackPlugin({
       title: 'CodeAwareness: VSCode panel',
-      publicPath: '/',
+      publicPath: (mode === 'production') ? '/vscode/' : '/',
       template: path.resolve(__dirname, mode === 'production' ? '../src/prod.template.html' : '../src/dev.template.html'),
       filename: 'index.html',
     }),

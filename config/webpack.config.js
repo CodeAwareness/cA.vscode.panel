@@ -6,7 +6,8 @@ const { mode, analyze } = require('webpack-nano/argv')
 const common = merge([
   {
     output: {
-      path: path.resolve(process.cwd(), 'dist')
+      path: path.resolve(process.cwd(), 'dist'),
+      publicPath: '/vscode/',
     },
   },
   parts.htmlFromTemplate(mode),
