@@ -15,7 +15,7 @@ Req.subscribe(val => {
 
 const CAWVS = {
   init: async function(caw): Promise<void> {
-    console.log('WSS: initializing pipe IPC with CAW Local Service. Client ID: ', caw)
+    logger.log('WebPanelVSIO: initializing pipe IPC with CAW Local Service. Client ID: ', caw)
   },
 
   /*
@@ -25,7 +25,7 @@ const CAWVS = {
     const id = shortid()
     return new Promise(
       (resolve, reject) => {
-        logger.info(`WSS: will emit action: ${action}`)
+        // logger.info(`WebPanelVSIO: will emit action: ${action}`)
         const command = 'localRequest'
         const key = action
         requests.push({ id, resolve, reject })
@@ -35,7 +35,7 @@ const CAWVS = {
   },
 
   dispose: function() {
-    console.log('disposing of CAWVS client')
+    logger.log('disposing of CAWVS client')
   },
 }
 

@@ -33,9 +33,8 @@
     CAWVS.transmit('auth:login', { strategy: 'local', email, password })
       .then(storeAuthInfo)
       .catch(err => {
-        console.log('AUTH ERR', err)
-        logger.error(err.message)
-        failure(`Login failed ! \r${apiError(err)}`)
+        logger.log('WebPanelLogin: error', err)
+        failure(`Login failed ! \r${err?.err || err}`)
       })
       .finally(() => {
         isLoading = false
