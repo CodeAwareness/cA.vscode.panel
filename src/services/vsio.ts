@@ -26,7 +26,7 @@ const CAWVS = {
     return new Promise(
       (resolve, reject) => {
         logger.info(`WSS: will emit action: ${action}`)
-        const command = 'api'
+        const command = 'localRequest'
         const key = action
         requests.push({ id, resolve, reject })
         Req.set(requests)
