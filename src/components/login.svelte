@@ -7,7 +7,7 @@
   import apiError from '@/services/api-error'
   import { t } from '@/services/i18n'
   import logger from '@/services/logger'
-  import CAWWS from '@/services/wsio'
+  import CAWVS from '@/services/vsio'
 
   import { settings } from '@/store/app.store'
   import { user, tokens } from '@/store/user.store'
@@ -30,7 +30,7 @@
 
   function auth() {
     isLoading = true
-    CAWWS.transmit('auth:login', { strategy: 'local', email, password })
+    CAWVS.transmit('auth:login', { strategy: 'local', email, password })
       .then(storeAuthInfo)
       .catch(err => {
         console.log('AUTH ERR', err)

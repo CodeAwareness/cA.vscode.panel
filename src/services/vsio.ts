@@ -13,7 +13,7 @@ Req.subscribe(val => {
   requests = val
 })
 
-const CAWWS = {
+const CAWVS = {
   init: async function(caw): Promise<void> {
     console.log('WSS: initializing pipe IPC with CAW Local Service. Client ID: ', caw)
   },
@@ -35,8 +35,8 @@ const CAWWS = {
   },
 
   dispose: function() {
-    console.log('disposing of CAWWS client')
+    console.log('disposing of CAWVS client')
   },
 }
 
-export default CAWWS
+export default CAWVS
