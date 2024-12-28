@@ -1,4 +1,5 @@
 <script lang="ts">
+  import logger from '@/services/logger'
   import { tokens } from '@/store/user.store'
   import { i18nReady } from '@/store/app.store'
 
@@ -9,7 +10,7 @@
   let isAuthenticated = false
 
   tokens.subscribe((value: any) => {
-    console.log('TOKENS', value)
+    logger.log('TOKENS', value)
     isAuthenticated = value && !!value.access
   })
 

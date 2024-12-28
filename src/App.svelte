@@ -5,7 +5,6 @@
 
   let _colorTheme = 'light'
   settings.subscribe(val => {
-    console.log('color theme', val)
     _colorTheme = [1, 3, undefined].includes(val.colorTheme) ? 'light' : 'dark'
   })
 

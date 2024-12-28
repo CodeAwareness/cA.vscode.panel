@@ -2,6 +2,7 @@
  import { fade } from 'svelte/transition'
 
  import config from '@/config'
+ import logger from '@/services/logger'
  import { vscode } from '@/store/vscode.store'
  import { activeProject, settings } from '@/store/app.store'
  import { fileContext, projectContext } from '@/store/context.store'
@@ -59,7 +60,7 @@
  }
 
  function showContext(contextItem) {
-   console.log('showing context', contextItem)
+   logger.log('showing context', contextItem)
  }
 
  // Toggle

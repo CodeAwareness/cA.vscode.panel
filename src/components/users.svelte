@@ -3,6 +3,7 @@
   import { fade } from 'svelte/transition'
 
   import config from '@/config'
+  import logger from '@/services/logger'
   import { t } from '@/services/i18n'
   import { refreshUsers } from '@/services/users'
 
@@ -19,7 +20,7 @@
   settings.subscribe(val => (colorTheme = val.colorTheme))
 
   function cameOnline(user) {
-    console.log('USER CAME ONLINE', user)
+    logger.log('USER CAME ONLINE', user)
   }
 
   type TPeerBlock = {
@@ -32,7 +33,7 @@
 
   selectedPeer.subscribe((peer: TPeerBlock) => {
     selUsers = {}
-    console.log('SELECTED PEER', peer)
+    logger.log('SELECTED PEER', peer)
     if (peer) selUsers[peer._id] = 1
   })
 

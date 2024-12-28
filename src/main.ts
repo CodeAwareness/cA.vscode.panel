@@ -99,7 +99,6 @@ Req.subscribe(val => {
  ****************************************************************/
 function cawEvent(event) {
   const { id, command, data } = event.data
-  console.log('Received caw event', command, data)
   switch (command) {
     case 'auth:info':
       tokens.set(data.tokens)
